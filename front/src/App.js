@@ -1,10 +1,31 @@
+import { useState } from 'react';
 import './App.css';
+import AppMain from './view/AppMain';
+import AppResult from './view/AppResult';
+import AppSurvey from './view/AppSurvey';
 
 function App() {
+  const [page, setPage] = useState(1);
+
+  const returnPage = () => {
+    switch (page) {
+      case 1:
+        return <AppMain />;
+      case 2:
+        return <AppResult />;
+      case 3:
+        return <AppSurvey />;
+      default:
+        return <div>디폴트</div>;
+    }
+  };
+
   return (
     <div className="container">
-      <h1>무글~</h1>
-      <div>이니셜 커밋용 테스트 화면입니다.</div>
+      <button onClick={() => setPage(1)}>AppMain</button>
+      <button onClick={() => setPage(2)}>AppResult</button>
+      <button onClick={() => setPage(3)}>AppSurvey</button>
+      <div>{returnPage()}</div>
     </div>
   );
 }
