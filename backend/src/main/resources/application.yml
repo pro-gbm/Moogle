@@ -6,6 +6,13 @@ spring:
     url: jdbc:mysql://moogle.cvxf4nsinqy7.ap-northeast-2.rds.amazonaws.com:3306/moogle?serverTimezone=Asia/Seoul
     username: (user)
     password: (password)
+  redis:
+    pool:
+      min-idle: 0
+      max-idle: 8
+      max-active: 8
+    host: (host)
+    port: 6379
   jpa:
     hibernate:
       ddl-auto: create
