@@ -1,8 +1,7 @@
-package com.progbm.Moogle.Repository;
+package com.progbm.Moogle.repository;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.Id;
@@ -11,9 +10,9 @@ import javax.persistence.Id;
 @RedisHash("user")
 public class User {
     @Id
-    String id;
-    String firstname;
-    String lastname;
+    private String id;
+    private String firstname;
+    private String lastname;
 
     @Builder
     public User(String id, String firstname, String lastname) {
