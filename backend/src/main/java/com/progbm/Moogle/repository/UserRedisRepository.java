@@ -1,4 +1,4 @@
-package com.progbm.Moogle.Repository;
+package com.progbm.Moogle.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
