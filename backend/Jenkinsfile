@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                withCredentials([usernamePassword(credentialsId: ${dockerCredential},
+                withCredentials([usernamePassword(credentialsId: dockerCredential,
                                  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
                         sh """
@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Publish') {
             steps {
-                withCredentials([usernamePassword(credentialsId: ${dockerCredential},
+                withCredentials([usernamePassword(credentialsId: dockerCredential,
                                  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
                         sh """
