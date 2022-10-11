@@ -1,6 +1,7 @@
 package com.progbm.Moogle.response.dto;
 
 import com.progbm.Moogle.exception.ErrorCode;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.http.HttpStatus;
@@ -9,12 +10,13 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class SingleDataResponse<T> extends BaseResponse<T>{
+public class DataResponse<T> extends BaseResponse<T>{
 
+    @ApiModelProperty(value = "API 요청에 대한 응답 데이터")
     private T data;
 
-    public static <T> SingleDataResponse setSuccessResponse(T data) {
-        return SingleDataResponse.builder()
+    public static <T> DataResponse setSuccessResponse(T data) {
+        return DataResponse.builder()
                 .success(true)
                 .status(HttpStatus.OK)
                 .code(ErrorCode.SUCCESS.getCode())
@@ -23,8 +25,8 @@ public class SingleDataResponse<T> extends BaseResponse<T>{
                 .build();
     }
 
-    public static <T> SingleDataResponse setFailResponse(T data, ErrorCode errorCode) {
-        return SingleDataResponse.builder()
+    public static <T> DataResponse setFailResponse(T data, ErrorCode errorCode) {
+        return DataResponse.builder()
                 .success(false)
                 .status(errorCode.getStatus())
                 .code(errorCode.getCode())
