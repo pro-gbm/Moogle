@@ -22,7 +22,7 @@ class ResponseServiceTest {
 
     @Test
     void 성공_응답_데이터_미포함() {
-        BaseResponse response = DataResponse.setSuccessResponse();
+        BaseResponse response = BaseResponse.setSuccessResponse();
 
         assertAll(
                 () -> assertTrue(response.isSuccess()),
@@ -35,7 +35,7 @@ class ResponseServiceTest {
     void 실패_응답_데이터_미포함() {
         ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
 
-        BaseResponse response = DataResponse.setFailResponse(errorCode);
+        BaseResponse response = BaseResponse.setFailResponse(errorCode);
 
         assertAll(
                 () -> assertFalse(response.isSuccess()),
