@@ -16,7 +16,7 @@ public class ResponseService {
      * @param <T>
      * @return
      */
-    public <T> DataResponse getSingleDataResponse(T data, HttpStatus status) {
+    public <T> DataResponse getDataResponse(T data, HttpStatus status) {
         return DataResponse.setSuccessResponse(data);
     }
 
