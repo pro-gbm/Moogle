@@ -2,7 +2,7 @@ version: "3"
 services:
   backend:
     build:
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
       context: ./backend
     container_name: backend
     volumes:
