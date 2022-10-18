@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-slim AS builder
 RUN ["pwd"]
-#COPY /var/jenkins_home/workspace/application.yml src/main/resources/application.yml
+COPY /home/ubuntu/application.yml src/main/resources/application.yml
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle .
