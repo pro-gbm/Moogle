@@ -12,7 +12,7 @@ RUN ./gradlew build
 #FROM adoptopenjdk:11-jdk-hotspot
 #COPY --from=builder build/libs/*.jar app.jar
 FROM openjdk:17-jdk-slim
-COPY build/libs/*.jar app.jar
+COPY --from=builder build/libs/*.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "/app.jar" ]
