@@ -1,59 +1,32 @@
-def dockerRepository = "moogle"
-def dockerCredential = "docker-hub"
-def dockerImageName = "moogle-api-img"
-def deployHost = "43.200.219.217"
-
 pipeline {
     agent any
 
     stages {
-        stage('Checkout'){
-            steps {
-                checkout scm
-            }
-        }
         stage('Build') {
             steps {
-                withCredentials([usernamePassword(credentialsId: dockerCredential,
-                                 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    script {
-                        sh """
-                            cp /var/jenkins_home/workspace/application.yml src/main/resources/application.yml
-                            chmod u+x ./gradlew
-                            ./gradlew clean build -Pdocker.repository=${dockerRepository} \
-                                                  -Pdocker.repository.username=${USERNAME} \
-                                                  -Pdocker.repository.password=${PASSWORD} \
-                                                  -Pdocker.image.name=${dockerImageName} \
-                                                  -Pdocker.image.tag=${currentBuild.number}
-                        """
+                script {
+                    try {
+
+                        sh 'docker-compose build'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+
                     }
                 }
             }
         }
-        stage('Publish') {
+        stage('Deploy') {
             steps {
-                withCredentials([usernamePassword(credentialsId: dockerCredential,
-                                 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    script {
-                        sh """
-                            ./gradlew jib -Pdocker.repository=${dockerRepository} \
-                                          -Pdocker.repository.username=${USERNAME} \
-                                          -Pdocker.repository.password=${PASSWORD} \
-                                          -Pdocker.image.name=${dockerImageName} \
-                                          -Pdocker.image.tag=${currentBuild.number}
-                        """
+                script{
+                    try {
+
+                        sh 'docker-compose up -d'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+
                     }
-                }
-            }
-        }
-        stage('Deploy'){
-            steps {
-                sshagent(credentials: ["deploy-key"]) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@${deployHost} \
-                        'docker container rm -f ${dockerImageName} &&
-                         docker container run -d -t -p 80:8080 --rm --name springbootapp ${dockerRepository}/${dockerImageName}:${currentBuild.number};'
-                    """
                 }
             }
         }
