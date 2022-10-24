@@ -2,6 +2,7 @@ FROM openjdk:17-jdk-slim AS builder
 RUN ["pwd"]
 #COPY /home/ubuntu/application.yml src/main/resources/application.yml
 ENV jasyptKey cat ../../jasyptKey
+RUN echo ${jasyptKey}
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle .
