@@ -1,4 +1,4 @@
-package com.progbm.Moogle.repository;
+package com.progbm.Moogle.user;
 
 import lombok.Builder;
 import lombok.Data;
