@@ -3,7 +3,7 @@
 version: '3.8'
 services:
   redis:
-    image: redis:latest
+    image: redis:alpine
     command: redis-server --port 6379
     container_name: moogle-redis
     hostname: moogle-redis
