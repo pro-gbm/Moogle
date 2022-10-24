@@ -1,13 +1,11 @@
-# profile
-
 spring:
   profiles:
     active: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://moogle.cvxf4nsinqy7.ap-northeast-2.rds.amazonaws.com:3306/moogle?serverTimezone=Asia/Seoul
-    username: (username)
-    password: (password)
+    url: ENC(QQKn6Qc6rupTbbhlFtahZtDW6GPHhKdudYrs92kKPhLgqCvBVJ1KkegjuErmDXNwpd41joGBp1Ow6ZONYQD6G7RB+4a4sFHEGU+MGCw07fjpZTFoM+FvnmGN4e3aI754hycxNLhlgrfqy6jNljqiNQ==)
+    username: ENC(R8KQRatusCygy4pmV23ZyQ==)
+    password: ENC(IZF9vr2JNu30Lj8N25e0Z/qJfI2R6aIU)
   jpa:
     hibernate:
       ddl-auto: create
@@ -20,3 +18,7 @@ spring:
       matching-strategy: ant_path_matcher
 logging.level:
   org.hibernate.SQL: debug
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
