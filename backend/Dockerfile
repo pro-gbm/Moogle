@@ -1,6 +1,7 @@
 FROM openjdk:17-jdk-slim AS builder
 RUN ["pwd"]
 #COPY /home/ubuntu/application.yml src/main/resources/application.yml
+ENV jasyptKey cat ../../jasyptKey
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle .
@@ -15,4 +16,4 @@ FROM openjdk:17-jdk-slim
 COPY --from=builder build/libs/Moogle-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
-ENTRYPOINT [ "java", "-jar", "/app.jar" ]
+ENTRYPOINT [ "java", "-jar", "/app.jar" , "-Djasypt.encryptor.password=${jasyptKey}" ]
