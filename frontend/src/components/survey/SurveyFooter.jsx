@@ -6,7 +6,7 @@ function SurveyFooter() {
       style={{
         height: CONST.FOOTERHEIGHT,
         width: '100%',
-        backgroundColor: 'bisque',
+        color: '#FFF',
         display: 'flex',
         alignItems: 'center',
       }}

@@ -9,6 +9,8 @@ function AppSurvey() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        height: '100%',
       }}
     >
       <SurveyHeader />
