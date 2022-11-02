@@ -12,6 +12,7 @@ env:
   S3_BUCKET_NAME: mooglebucket
   CODE_DEPLOY_APPLICATION_NAME: MoogleCodeDeployApp
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: MoogleCodeDeployApp-group
+  WORKDIR: ./backend
 
 permissions:
   contents: read
@@ -25,8 +26,7 @@ jobs:
     steps:
     # (1) 기본 체크아웃
     - name: Checkout
-      working-directory: backend
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3
       
     # (2) JDK 11 세팅
     - name: Set up JDK 17
@@ -40,6 +40,7 @@ jobs:
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
       with:
         arguments: clean build -x test
+        working-directory: ${{ env.WORKDIR }}
 
     # (4) AWS 인증 (IAM 사용자 Access Key, Secret Key 활용)
     - name: Configure AWS credentials
