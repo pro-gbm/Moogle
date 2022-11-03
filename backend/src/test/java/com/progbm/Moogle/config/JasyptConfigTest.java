@@ -1,29 +1,32 @@
 package com.progbm.Moogle.config;
 
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.assertj.core.api.Assertions;
+import org.jasypt.encryption.StringEncryptor;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 class JasyptConfigTest {
 
+    @Autowired
+    @Qualifier("jasyptStringEncryptor")
+    public StringEncryptor encryptor;
+
+    @Value("${spring.datasource.username}")
+    private String username;
+
     @Test
-    void jasypt() {
-        String url = "url_info";
-        String username = "username_info";
-        String password = "password_info";
+    @DisplayName("암호화 테스트")
+    void jasyptTest() {
+        String decodedTxt = encryptor.decrypt("R8KQRatusCygy4pmV23ZyQ==");
 
-        System.out.println(jasyptEncoding(url));
-        System.out.println(jasyptEncoding(username));
-        System.out.println(jasyptEncoding(password));
+        Assertions.assertThat(decodedTxt).isEqualTo("root");
+        Assertions.assertThat(username).isEqualTo("root");
+
     }
-
-    public String jasyptEncoding(String value) {
-
-        String key = "mgeEnc!";
-        StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
-        pbeEnc.setAlgorithm("PBEWithMD5AndDES");
-        pbeEnc.setPassword(key);
-        return pbeEnc.encrypt(value);
-    }
-
 
 }
