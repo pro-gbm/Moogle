@@ -60,7 +60,7 @@ class ResponseServiceTest {
     }
 
     @Test
-    void dataResponse_listData_삽입_썽공() {
+    void dataResponse_listData_삽입_성공() {
         String dataA = "data A";
         String dataB = "data B";
         String dataC = "data C";
