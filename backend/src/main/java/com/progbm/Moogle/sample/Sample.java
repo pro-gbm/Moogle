@@ -1,6 +1,5 @@
 package com.progbm.Moogle.sample;
 
-import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
