@@ -1,5 +1,6 @@
 package com.progbm.Moogle.genre;
 
+import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Genre {
+public class Genre extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
