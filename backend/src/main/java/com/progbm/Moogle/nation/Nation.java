@@ -1,11 +1,12 @@
 package com.progbm.Moogle.nation;
 
+import com.progbm.Moogle.movie.Movie;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,5 +24,8 @@ public class Nation extends BaseTimeEntity {
     private String nationCode;
 
     private String continent;
+
+    @OneToMany(mappedBy = "nation")
+    private List<Movie> movies = new ArrayList<>();
 
 }
