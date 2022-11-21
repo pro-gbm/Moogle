@@ -38,10 +38,10 @@ public class Movie extends BaseTimeEntity {
 //    private Nation nation;
 
     // N : N 관계
-//    private List<Actor> actorList;
+//    private List<Actor> actors;
 
-//    private List<Genre> genreList;
+//    private List<Genre> genres;
 
-//    private List<Ott> ottList;
+//    private List<Ott> otts;
 
 }
