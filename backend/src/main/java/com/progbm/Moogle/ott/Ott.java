@@ -1,4 +1,4 @@
-package com.progbm.Moogle;
+package com.progbm.Moogle.ott;
 
 import com.progbm.Moogle.util.BaseTimeEntity;
 import com.progbm.Moogle.util.Quality;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ott extends BaseTimeEntity {
+public class Ott extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
