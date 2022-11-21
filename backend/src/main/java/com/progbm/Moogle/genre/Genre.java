@@ -1,11 +1,15 @@
 package com.progbm.Moogle.genre;
 
+import com.progbm.Moogle.movie.MovieGenre;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,7 +26,8 @@ public class Genre extends BaseTimeEntity {
 
     private String name;
 
-//    private Movie movie;
+    @OneToMany(mappedBy = "genre")
+    private List<MovieGenre> movieGenres = new ArrayList<>();
 
 //    private Drama drama;
 
