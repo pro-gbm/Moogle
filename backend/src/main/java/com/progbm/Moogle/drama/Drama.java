@@ -3,6 +3,8 @@ package com.progbm.Moogle.drama;
 import com.progbm.Moogle.actor.Actor;
 import com.progbm.Moogle.director.Director;
 import com.progbm.Moogle.genre.Genre;
+import com.progbm.Moogle.nation.Nation;
+import com.progbm.Moogle.ott.Ott;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
 
@@ -34,7 +36,8 @@ public class Drama extends BaseTimeEntity {
     @ManyToMany
     private List<Genre> genre;
 
-//    private List<Ott> otts;
+    @ManyToMany
+    private List<Ott> otts;
 
     private LocalDateTime openingDate;
 
@@ -42,7 +45,8 @@ public class Drama extends BaseTimeEntity {
 
     private Integer season;
 
-//    private Nation nation;
+    @ManyToOne
+    private Nation nation;
 
     private Double score;
 
