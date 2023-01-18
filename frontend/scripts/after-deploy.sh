@@ -1,5 +1,5 @@
 #!/bin/bash
-PROJECT_ROOT="/home/ubuntu/app/frontend"
+PROJECT_ROOT="/home/ubuntu/app/frontend/build"
 APP_LOG="$PROJECT_ROOT/log/application.log"
 ERROR_LOG="$PROJECT_ROOT/log/error.log"
 DEPLOY_LOG="$PROJECT_ROOT/log/deploy.log"
