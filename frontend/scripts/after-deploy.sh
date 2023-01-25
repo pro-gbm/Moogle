@@ -16,7 +16,4 @@ sudo pm2 start dist
 echo "$TIME_NOW > END" >> $DEPLOY_LOG
 
 
-ENC_KEY=${ENC_KEY}
-
-echo "암호화키 >> $ENC_KEY" >> $DEPLOY_LOG
 
