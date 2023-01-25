@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: test
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ENC(QQKn6Qc6rupTbbhlFtahZtDW6GPHhKdudYrs92kKPhLgqCvBVJ1KkegjuErmDXNwpd41joGBp1Ow6ZONYQD6G7RB+4a4sFHEGU+MGCw07fjpZTFoM+FvnmGN4e3aI754hycxNLhlgrfqy6jNljqiNQ==)
@@ -15,7 +15,7 @@ spring:
     port: 6379
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         show_sql: true
