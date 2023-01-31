@@ -14,8 +14,12 @@ class TmdbServiceTest {
     public void tmdbApiCallTest() {
         PopularMovieResponse popularMovies = tmdbService.getPopularMovies();
         System.out.println("popularMovies = " + popularMovies);
+    }
 
-
+    @Test
+    public void getGenres() {
+        GenreResponse genres = tmdbService.getGenres();
+        System.out.println("genres = " + genres);
     }
 
 }
