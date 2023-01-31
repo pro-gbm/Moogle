@@ -34,4 +34,22 @@ public class TmdbService {
                 .bodyToMono(PopularMovieResponse.class)
                 .block();
     }
+
+    /**
+     * TMDB API 에서 장르 목록을 가져온다
+     */
+    public GenreResponse getGenres() {
+        return webClient.mutate()
+                .baseUrl(API_URL)
+                .build()
+                .get()
+                .uri(uriBuilder -> uriBuilder.path("/genre/movie/list")
+                        .queryParam("api_key", API_KEY)
+                        .queryParam("language", LANGUAGE)
+                        .queryParam("page", 1).build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(GenreResponse.class)
+                .block();
+    }
 }
