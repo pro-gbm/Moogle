@@ -1,7 +1,7 @@
 package com.progbm.Moogle.genre;
 
-import com.progbm.Moogle.tmdb.GenreResponse;
 import com.progbm.Moogle.tmdb.TmdbService;
+import com.progbm.Moogle.tmdb.response.GenreResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
