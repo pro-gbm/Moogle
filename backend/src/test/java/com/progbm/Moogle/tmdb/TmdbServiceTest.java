@@ -1,8 +1,11 @@
 package com.progbm.Moogle.tmdb;
 
+import com.progbm.Moogle.nation.NationRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Arrays;
 
 @SpringBootTest
 class TmdbServiceTest {
@@ -22,4 +25,9 @@ class TmdbServiceTest {
         System.out.println("genres = " + genres);
     }
 
+    @Test
+    public void getNations() {
+        NationResponse[] nations = tmdbService.getNations();
+        System.out.println("nations = " + Arrays.toString(nations));
+    }
 }
