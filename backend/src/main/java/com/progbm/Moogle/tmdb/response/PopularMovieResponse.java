@@ -1,4 +1,4 @@
-package com.progbm.Moogle.tmdb;
+package com.progbm.Moogle.tmdb.response;
 
 import lombok.Data;
 

@@ -1,11 +1,10 @@
 package com.progbm.Moogle.tmdb;
 
-import com.progbm.Moogle.nation.NationRepository;
+import com.progbm.Moogle.tmdb.response.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -30,5 +29,18 @@ class TmdbServiceTest {
     public void getNations() {
         List<NationResponse> nations = tmdbService.getNations();
         System.out.println("nations = " + nations);
+    }
+
+    @Test
+    public void getActor() {
+        int personId = 974169;
+        ActorResponse actorResponse = tmdbService.getActor(personId);
+        System.out.println("actorResponse = " + actorResponse);
+    }
+
+    @Test
+    public void getPopularActor() {
+        PopularActorResponse popularActor = tmdbService.getPopularActor();
+        System.out.println("popularActor = " + popularActor);
     }
 }
