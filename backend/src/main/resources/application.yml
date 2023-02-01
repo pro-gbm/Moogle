@@ -1,6 +1,40 @@
+--- # h2 개발
 spring:
   profiles:
     active: local
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/moogle
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  redis:
+    pool:
+      min-idle: 0
+      max-idle: 8
+      max-active: 8
+    host: (host)
+    port: 6379
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        # show_sql: true
+        format_sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+logging.level:
+  org.hibernate.SQL: debug
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+
+--- # 배포
+spring:
+  profiles:
+    active: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ENC(QQKn6Qc6rupTbbhlFtahZtDW6GPHhKdudYrs92kKPhLgqCvBVJ1KkegjuErmDXNwpd41joGBp1Ow6ZONYQD6G7RB+4a4sFHEGU+MGCw07fjpZTFoM+FvnmGN4e3aI754hycxNLhlgrfqy6jNljqiNQ==)
