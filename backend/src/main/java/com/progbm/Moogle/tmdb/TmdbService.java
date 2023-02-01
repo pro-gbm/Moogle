@@ -52,4 +52,23 @@ public class TmdbService {
                 .bodyToMono(GenreResponse.class)
                 .block();
     }
+
+    /**
+     * TMDB API 에서 지원하는 국가 정보를 가져온다.
+     * @return
+     */
+    public NationResponse[] getNations() {
+        return webClient.mutate()
+                .baseUrl(API_URL)
+                .build()
+                .get()
+                .uri(uriBuilder -> uriBuilder.path("/configuration/countries")
+                        .queryParam("api_key", API_KEY)
+                        .queryParam("language", LANGUAGE)
+                        .queryParam("page", 1).build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(NationResponse[].class)
+                .block();
+    }
 }
