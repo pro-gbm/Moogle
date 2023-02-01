@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 class TmdbServiceTest {
@@ -27,7 +28,7 @@ class TmdbServiceTest {
 
     @Test
     public void getNations() {
-        NationResponse[] nations = tmdbService.getNations();
-        System.out.println("nations = " + Arrays.toString(nations));
+        List<NationResponse> nations = tmdbService.getNations();
+        System.out.println("nations = " + nations);
     }
 }

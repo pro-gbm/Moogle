@@ -2,9 +2,12 @@ package com.progbm.Moogle.tmdb;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -57,7 +60,7 @@ public class TmdbService {
      * TMDB API 에서 지원하는 국가 정보를 가져온다.
      * @return
      */
-    public NationResponse[] getNations() {
+    public List<NationResponse> getNations() {
         return webClient.mutate()
                 .baseUrl(API_URL)
                 .build()
@@ -68,7 +71,7 @@ public class TmdbService {
                         .queryParam("page", 1).build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(NationResponse[].class)
+                .bodyToMono(new ParameterizedTypeReference<List<NationResponse>>() {})
                 .block();
     }
 }
