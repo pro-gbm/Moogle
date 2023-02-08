@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -19,11 +20,15 @@ public class GenreService {
     private final GenreRepository genreRepository;
     private final TmdbService tmdbService;
 
-    public void insertGenres() {
+    public void saveGenres() {
+        Set<Integer> savedGenreTIds = genreRepository.findAll().stream().map(Genre::getTId).collect(Collectors.toSet());
+
         GenreResponse genreResponse = tmdbService.getGenres();
         List<Genre> genres = genreResponse.getGenres().stream()
                 .map(movieGenre -> Genre.builder().tId(movieGenre.getId()).name(movieGenre.getName()).build())
                 .collect(Collectors.toList());
+
+        genres = genres.stream().filter(genre -> !savedGenreTIds.contains(genre.getTId())).collect(Collectors.toList());
 
         genreRepository.saveAll(genres);
     }
