@@ -1,5 +1,6 @@
 package com.progbm.Moogle.nation;
 
+import com.progbm.Moogle.actor.Actor;
 import com.progbm.Moogle.movie.Movie;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
@@ -28,4 +29,6 @@ public class Nation extends BaseTimeEntity {
     @OneToMany(mappedBy = "nation")
     private List<Movie> movies = new ArrayList<>();
 
+    @OneToMany(mappedBy = "nation")
+    private List<Actor> actors = new ArrayList<>();
 }

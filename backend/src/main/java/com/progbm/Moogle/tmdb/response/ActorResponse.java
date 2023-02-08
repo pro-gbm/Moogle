@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class ActorResponse {
 
-    private String birthday; // string or null --> 나이로 변환하는 로직 필요
+    private String birthday; // string or null
     private int id;
     private String name;
-    private int gender; // defauly:0, 0 ~ 3
+    private int gender; // 1: FEMALE, 2: MALE
     private Double popularity;
     private String profilePath; // string or null
 
