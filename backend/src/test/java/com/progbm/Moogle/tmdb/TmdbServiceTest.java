@@ -14,8 +14,8 @@ class TmdbServiceTest {
     private TmdbService tmdbService;
 
     @Test
-    public void tmdbApiCallTest() {
-        PopularMovieResponse popularMovies = tmdbService.getPopularMovies();
+    public void getPopularMovies() {
+        PopularMovieResponse popularMovies = tmdbService.getPopularMovies(1);
         System.out.println("popularMovies = " + popularMovies);
     }
 

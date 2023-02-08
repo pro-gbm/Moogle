@@ -24,7 +24,7 @@ public class TmdbService {
     /**
      * TMDB API 에서 인기있는 영화 id 목록을 가져온다
      */
-    public PopularMovieResponse getPopularMovies() {
+    public PopularMovieResponse getPopularMovies(int page) {
         return webClient.mutate()
                 .baseUrl(API_URL)
                 .build()
@@ -32,7 +32,7 @@ public class TmdbService {
                 .uri(uriBuilder -> uriBuilder.path("/movie/popular")
                         .queryParam("api_key", API_KEY)
                         .queryParam("language", LANGUAGE)
-                        .queryParam("page", 1).build())
+                        .queryParam("page", page).build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(PopularMovieResponse.class)

@@ -1,8 +1,6 @@
 package com.progbm.Moogle.movie;
 
-import com.progbm.Moogle.actor.Actor;
 import com.progbm.Moogle.director.Director;
-import com.progbm.Moogle.genre.Genre;
 import com.progbm.Moogle.nation.Nation;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
@@ -16,6 +14,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
+@EqualsAndHashCode(of = {"tId"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Movie extends BaseTimeEntity {
 
@@ -34,6 +33,9 @@ public class Movie extends BaseTimeEntity {
     private Integer attendance;
 
     private String thumbnailUrl;
+
+    @Column(length = 1000)
+    private String description;
 
     // N : 1 관계
     @ManyToOne(fetch = FetchType.LAZY)
