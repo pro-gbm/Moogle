@@ -1,10 +1,13 @@
 package com.progbm.Moogle.tmdb.response;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PopularMovieResponse {
 
     private int page;
@@ -13,6 +16,7 @@ public class PopularMovieResponse {
     private int totalResults;
 
     @Data
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class PopularMovie {
         private boolean adult;
         private String backdropPath;
