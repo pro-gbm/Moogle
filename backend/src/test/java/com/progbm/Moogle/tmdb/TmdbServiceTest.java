@@ -40,7 +40,7 @@ class TmdbServiceTest {
 
     @Test
     public void getPopularActor() {
-        PopularActorResponse popularActor = tmdbService.getPopularActor();
+        PopularActorResponse popularActor = tmdbService.getPopularActor(1);
         System.out.println("popularActor = " + popularActor);
     }
 }

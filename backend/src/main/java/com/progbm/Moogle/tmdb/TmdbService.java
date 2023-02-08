@@ -97,7 +97,7 @@ public class TmdbService {
     /**
      * TMDB API 에서 지원하는 배우 리스트 정보를 가져온다.
      */
-    public PopularActorResponse getPopularActor() {
+    public PopularActorResponse getPopularActor(int page) {
         return webClient.mutate()
                 .baseUrl(API_URL)
                 .build()
@@ -105,7 +105,7 @@ public class TmdbService {
                 .uri(uriBuilder -> uriBuilder.path("/person/popular")
                         .queryParam("api_key", API_KEY)
                         .queryParam("language", LANGUAGE)
-                        .queryParam("page", 1)
+                        .queryParam("page", page)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
