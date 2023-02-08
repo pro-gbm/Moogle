@@ -19,9 +19,9 @@ class GenreServiceTest {
     @Test
     @DisplayName("장르 삽입 & 조회 테스트")
     @Transactional
-    public void insertGenresTest() {
+    public void saveGenresTest() {
         // given
-        genreService.insertGenres();
+        genreService.saveGenres();
 
         // when
         List<Genre> genres = genreService.getGenres();
