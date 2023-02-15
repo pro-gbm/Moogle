@@ -20,7 +20,7 @@ public class Director extends BaseTimeEntity {
     @GeneratedValue
     private Long id;
 
-    private Integer tId;
+    private Integer tmdbId;
 
     private String name;
 
