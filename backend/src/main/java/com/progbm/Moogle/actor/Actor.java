@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Builder
-@EqualsAndHashCode(of = {"tId"})
+@EqualsAndHashCode(of = {"tmdbId"})
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString

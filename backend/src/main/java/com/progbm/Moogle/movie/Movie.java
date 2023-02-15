@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"tId"})
+@EqualsAndHashCode(of = {"tmdbId"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Movie extends BaseTimeEntity {
 

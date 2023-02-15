@@ -27,7 +27,7 @@ public class ActorService {
 
         int page = 1;
 
-        List<Integer> savedMovieTIds = actorRepository.findAll().stream().map(Actor::getTId).collect(Collectors.toList());
+        List<Integer> savedMovieTmdbIds = actorRepository.findAll().stream().map(Actor::getTmdbId).collect(Collectors.toList());
 
         for (int i = 1; i <= page; i++) {
             PopularActorResponse popularActors = tmdbService.getPopularActor(i);
@@ -35,7 +35,7 @@ public class ActorService {
             List<Actor> actors = popularActors.getResults().stream().map(popularActor -> {
                 ActorResponse actor = tmdbService.getActor(popularActor.getId());
                 return Actor.builder()
-                        .tId(popularActor.getId())
+                        .tmdbId(popularActor.getId())
                         .name(popularActor.getName())
                         .age(birthDayToAge(actor.getBirthday()))
                         .gender(Gender.getGender(actor.getGender()))
@@ -44,7 +44,7 @@ public class ActorService {
                         .build();
             }).collect(Collectors.toList());
 
-            actors = actors.stream().filter(actor -> !savedMovieTIds.contains(actor.getTId())).collect(Collectors.toList());
+            actors = actors.stream().filter(actor -> !savedMovieTmdbIds.contains(actor.getTmdbId())).collect(Collectors.toList());
 
             actorRepository.saveAll(actors);
         }
