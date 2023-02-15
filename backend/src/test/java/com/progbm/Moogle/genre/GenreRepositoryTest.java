@@ -1,34 +1,29 @@
 package com.progbm.Moogle.genre;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class GenreServiceTest {
+@Transactional
+class GenreRepositoryTest {
 
     @Autowired
-    private GenreService genreService;
+    GenreRepository genreRepository;
 
     @Test
-    @DisplayName("장르 삽입 & 조회 테스트")
-    @Transactional
-    public void saveGenresTest() {
+    public void findByTIdTest() {
         // given
-        genreService.saveGenres();
+        int genreTId = 28;
 
         // when
-        List<Genre> genres = genreService.getGenres();
+        Genre genre = genreRepository.findByTmdbId(genreTId).get();
+        System.out.println("genre = " + genre);
 
         // then
-        System.out.println(genres.size());
-        assertThat(!genres.isEmpty());
+        assertThat(genre).isNotNull();
     }
-
 }
