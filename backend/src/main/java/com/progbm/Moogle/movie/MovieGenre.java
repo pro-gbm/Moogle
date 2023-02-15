@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MovieGenre extends BaseTimeEntity {
@@ -17,11 +17,19 @@ public class MovieGenre extends BaseTimeEntity {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
+
+    public void updateMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public void updateGenre(Genre genre) {
+        this.genre = genre;
+    }
 }

@@ -47,13 +47,25 @@ public class Movie extends BaseTimeEntity {
     private Nation nation;
 
     // N : N 관계 (1 : N 연관 테이블 매핑)
+    @Builder.Default
     @OneToMany(mappedBy = "movie")
     private List<MovieActor> movieActors = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "movie")
     private List<MovieGenre> movieGenres = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "movie")
     private List<MovieOtt> movieOtts = new ArrayList<>();
 
+    public void addMovieGenre(MovieGenre movieGenre) {
+        movieGenres.add(movieGenre);
+        movieGenre.updateMovie(this);
+    }
+
+    public void deleteMovieGenre(MovieGenre movieGenre) {
+        movieGenres.remove(movieGenre);
+        movieGenre.updateMovie(null);
+    }
 }
