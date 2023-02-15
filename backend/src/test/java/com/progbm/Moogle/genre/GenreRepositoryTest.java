@@ -15,12 +15,12 @@ class GenreRepositoryTest {
     GenreRepository genreRepository;
 
     @Test
-    public void findByTIdTest() {
+    public void findByTmdbIdTest() {
         // given
-        int genreTId = 28;
+        int genreTmdbId = 28;
 
         // when
-        Genre genre = genreRepository.findByTmdbId(genreTId).get();
+        Genre genre = genreRepository.findByTmdbId(genreTmdbId).get();
         System.out.println("genre = " + genre);
 
         // then
