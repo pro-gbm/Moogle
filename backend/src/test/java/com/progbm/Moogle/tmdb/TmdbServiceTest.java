@@ -43,4 +43,10 @@ class TmdbServiceTest {
         PopularActorResponse popularActor = tmdbService.getPopularActor(1);
         System.out.println("popularActor = " + popularActor);
     }
+
+    @Test
+    public void getOtts() {
+        OttResponse ottResponse = tmdbService.getOtts();
+        System.out.println("otts = " + ottResponse);
+    }
 }

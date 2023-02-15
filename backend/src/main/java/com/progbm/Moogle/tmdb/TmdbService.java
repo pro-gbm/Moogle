@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 @Slf4j
@@ -113,4 +114,22 @@ public class TmdbService {
                 .block();
     }
 
+    /**
+     * TMDB API에 있는 Provider들에 대한 정보를 가져온다.
+     */
+    public OttResponse getOtts()
+    {
+        return webClient.mutate()
+                .baseUrl(API_URL)
+                .build()
+                .get()
+                .uri(uriBuilder -> uriBuilder.path("/watch/providers/movie")
+                        .queryParam("api_key", API_KEY)
+                        .queryParam("language", LANGUAGE)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(OttResponse.class)
+                .block();
+    }
 }
