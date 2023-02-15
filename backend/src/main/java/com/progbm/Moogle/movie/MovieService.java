@@ -34,14 +34,14 @@ public class MovieService {
      */
     public void savePopularMovies(int page) {
         // DB 에 저장된 영화 목록 불러와서 tId 목록으로 가공
-        Set<Integer> savedMovieTIds = movieRepository.findAll().stream().map(Movie::getTId).collect(Collectors.toSet());
+        Set<Integer> savedMovieTIds = movieRepository.findAll().stream().map(Movie::getTmdbId).collect(Collectors.toSet());
 
         for (int i = 1; i <= page; i++) {
             // 인기 영화 목록 응답을 영화 엔티티 목록으로 가공
             PopularMovieResponse popularMovies = tmdbService.getPopularMovies(page);
             List<Movie> movies = popularMovies.getResults().stream().map(popularMovie -> {
                 Movie movie = Movie.builder()
-                        .tId(popularMovie.getId())
+                        .tmdbId(popularMovie.getId())
                         .title(popularMovie.getTitle())
                         .openingDate(LocalDate.parse(popularMovie.getReleaseDate(), formatter).atStartOfDay())
                         .score(popularMovie.getVoteAverage())
@@ -57,7 +57,7 @@ public class MovieService {
             }).collect(Collectors.toList());
 
             // DB 에 이미 저장되어 있는 영화들을 tId 로 확인하여 제외
-            movies = movies.stream().filter(movie -> !savedMovieTIds.contains(movie.getTId())).collect(Collectors.toList());
+            movies = movies.stream().filter(movie -> !savedMovieTIds.contains(movie.getTmdbId())).collect(Collectors.toList());
 
             // 영화 목록 저장
             movieRepository.saveAll(movies);
