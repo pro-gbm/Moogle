@@ -37,7 +37,7 @@ public class ActorService {
                 return Actor.builder()
                         .tmdbId(popularActor.getId())
                         .name(popularActor.getName())
-                        .age(birthDayToAge(actor.getBirthday()))
+                        .age(actor.getBirthday() == null ? 0 : birthDayToAge(actor.getBirthday()))
                         .gender(Gender.getGender(actor.getGender()))
 //                        .nation()
                         .thumbnailUrl(actor.getProfilePath())
