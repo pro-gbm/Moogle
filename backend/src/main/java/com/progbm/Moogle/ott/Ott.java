@@ -22,6 +22,8 @@ public class Ott extends BaseTimeEntity {
 
     private String ott;
 
+    private String thumbnailUrl;
+
     private Integer price;
 
     private Byte personnel;
