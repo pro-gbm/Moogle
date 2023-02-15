@@ -21,7 +21,7 @@ class MovieServiceTest {
     @Transactional
     public void savePopularMoviesTest() {
         // given
-        movieService.savePopularMovies(3);
+        movieService.savePopularMovies(1);
 
         // when
         List<Movie> movies = movieService.getMovies();

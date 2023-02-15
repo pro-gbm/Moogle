@@ -22,7 +22,7 @@ public class Genre extends BaseTimeEntity {
     @GeneratedValue
     private Long id;
 
-    private Integer tId;
+    private Integer tmdbId;
 
     private String name;
 
@@ -31,4 +31,13 @@ public class Genre extends BaseTimeEntity {
 
 //    private Drama drama;
 
+    public void addMovieGenre(MovieGenre movieGenre) {
+        movieGenres.add(movieGenre);
+        movieGenre.updateGenre(this);
+    }
+
+    public void deleteMovieGenre(MovieGenre movieGenre) {
+        movieGenres.remove(movieGenre);
+        movieGenre.updateGenre(null);
+    }
 }
