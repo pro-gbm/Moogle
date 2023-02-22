@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,12 +37,17 @@ public class MovieService {
     public void savePopularMovies(int page) {
         // DB 에 저장된 영화 목록 불러와서 tmdbId 목록으로 가공
         Set<Integer> savedMovieTmdbIds = movieRepository.findAll().stream().map(Movie::getTmdbId).collect(Collectors.toSet());
+        Map<Integer, List<Integer>> movieGenreMap = new HashMap<>();
 
         for (int i = 1; i <= page; i++) {
             // 인기 영화 목록 응답을 영화 엔티티 목록으로 가공
             PopularMovieResponse popularMovies = tmdbService.getPopularMovies(page);
             List<Movie> movies = popularMovies.getResults().stream().map(popularMovie -> {
-                Movie movie = Movie.builder()
+                // popularMovie 의 id 를 키로 장르 목록 저장
+                movieGenreMap.put(popularMovie.getId(), popularMovie.getGenreIds());
+
+                // 영화 엔티티 생성 후 리턴
+                return Movie.builder()
                         .tmdbId(popularMovie.getId())
                         .title(popularMovie.getTitle())
                         .openingDate(LocalDate.parse(popularMovie.getReleaseDate(), formatter).atStartOfDay())
@@ -48,19 +55,16 @@ public class MovieService {
                         .thumbnailUrl(IMAGE_URL + popularMovie.getPosterPath())
                         .description(popularMovie.getOverview())
                         .build();
-
-                System.out.println("movie.getMovieGenres() = " + movie.getMovieGenres());
-
-                // 장르 목록 추가
-                this.addGenres(movie, popularMovie.getGenreIds());
-                return movie;
             }).collect(Collectors.toList());
 
             // DB 에 이미 저장되어 있는 영화들을 tmdbId 로 확인하여 제외
             movies = movies.stream().filter(movie -> !savedMovieTmdbIds.contains(movie.getTmdbId())).collect(Collectors.toList());
 
             // 영화 목록 저장
-            movieRepository.saveAll(movies);
+            List<Movie> savedMovies = movieRepository.saveAll(movies);
+
+            // 영화에 매핑된 장르 목록 저장
+            savedMovies.forEach(movie -> this.addGenres(movie, movieGenreMap.get(movie.getTmdbId())));
         }
     }
 
@@ -70,29 +74,21 @@ public class MovieService {
     }
 
     public void addGenres(Movie movie, List<Integer> genreIds) {
+        if (genreIds == null || genreIds.isEmpty()) {
+            return;
+        }
+
         // 장르 id 리스트로 장르 리스트 조회
         List<Genre> genres = genreIds.stream()
                 .map(genreId -> genreRepository.findByTmdbId(genreId).orElse(null))
                 .filter(genre -> genre != null)
                 .collect(Collectors.toList());
 
-        System.out.println("genres = " + genres);
-
         // 영화 장르 엔티티로 만들어서 저장하기
         List<MovieGenre> movieGenres = genres.stream()
                 .map(genre -> MovieGenre.builder().movie(movie).genre(genre).build())
                 .collect(Collectors.toList());
 
-        System.out.println("movieGenres = " + movieGenres);
-
-        // 영화, 장르 엔티티에 영화 장르 엔티티 넣기
-        movieGenres.forEach(movieGenre -> {
-            movie.addMovieGenre(movieGenre);
-            genres.forEach(genre -> {
-                genre.addMovieGenre(movieGenre);
-                // 영화 장르 엔티티 저장
-                movieGenreRepository.save(movieGenre);
-            });
-        });
+        movieGenreRepository.saveAll(movieGenres);
     }
 }

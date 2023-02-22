@@ -25,7 +25,6 @@ class MovieServiceTest {
 
         // when
         List<Movie> movies = movieService.getMovies();
-        System.out.println("movies = " + movies);
 
         // then
         assertThat(movies.isEmpty());

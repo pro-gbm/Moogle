@@ -32,4 +32,13 @@ public class MovieGenre extends BaseTimeEntity {
     public void updateGenre(Genre genre) {
         this.genre = genre;
     }
+
+    @Override
+    public String toString() {
+        return "MovieGenre{" +
+                "id=" + id +
+                ", movieId=" + movie.getId() +
+                ", genreId=" + genre.getId() +
+                '}';
+    }
 }
