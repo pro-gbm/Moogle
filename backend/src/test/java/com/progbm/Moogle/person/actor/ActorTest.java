@@ -1,5 +1,6 @@
-package com.progbm.Moogle.actor;
+package com.progbm.Moogle.person.actor;
 
+import com.progbm.Moogle.actor.Actor;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

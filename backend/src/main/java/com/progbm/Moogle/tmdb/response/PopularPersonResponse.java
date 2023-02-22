@@ -8,20 +8,21 @@ import java.util.List;
 
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PopularActorResponse {
+public class PopularPersonResponse {
 
     private int page;
-    private List<PopularActor> results;
+    private List<PopularPerson> results;
     private int totalPages;
     private int totalResults;
 
     @Data
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public static class PopularActor {
-        private String profilePath;
-        private boolean adult;
+    public static class PopularPerson {
         private int id;
         private String name;
-        private Double popularity;
+        private boolean adult;
+        private int gender; // 1: FEMALE, 2: MALE
+        private String profilePath; // string or null
+        private String knownForDepartment; // Acting, Directing
     }
 }
