@@ -20,6 +20,8 @@ public class Ott extends BaseTimeEntity {
     @GeneratedValue
     private Long id;
 
+    private int providerId;
+
     private String ott;
 
     private String thumbnailUrl;
