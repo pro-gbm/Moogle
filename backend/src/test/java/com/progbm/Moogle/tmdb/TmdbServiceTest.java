@@ -32,15 +32,8 @@ class TmdbServiceTest {
     }
 
     @Test
-    public void getActor() {
-        int personId = 974169;
-        ActorResponse actorResponse = tmdbService.getActor(personId);
-        System.out.println("actorResponse = " + actorResponse);
-    }
-
-    @Test
-    public void getPopularActor() {
-        PopularActorResponse popularActor = tmdbService.getPopularActor(1);
+    public void getPopularPerson() {
+        PopularPersonResponse popularActor = tmdbService.getPopularPerson(1);
         System.out.println("popularActor = " + popularActor);
     }
 
