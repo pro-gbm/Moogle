@@ -78,27 +78,9 @@ public class TmdbService {
     }
 
     /**
-     * TMDB API 에서 지원하는 배우 정보를 가져온다.
+     * TMDB API 에서 지원하는 유명인(배우, 감독) 리스트 정보를 가져온다.
      */
-    public ActorResponse getActor(int personId) {
-        return webClient.mutate()
-                .baseUrl(API_URL)
-                .build()
-                .get()
-                .uri(uriBuilder -> uriBuilder.path("/person/" + personId)
-                        .queryParam("api_key", API_KEY)
-                        .queryParam("language", LANGUAGE)
-                        .build())
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .bodyToMono(ActorResponse.class)
-                .block();
-    }
-
-    /**
-     * TMDB API 에서 지원하는 배우 리스트 정보를 가져온다.
-     */
-    public PopularActorResponse getPopularActor(int page) {
+    public PopularPersonResponse getPopularPerson(int page) {
         return webClient.mutate()
                 .baseUrl(API_URL)
                 .build()
@@ -110,7 +92,7 @@ public class TmdbService {
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(PopularActorResponse.class)
+                .bodyToMono(PopularPersonResponse.class)
                 .block();
     }
 
