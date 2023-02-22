@@ -1,29 +1,14 @@
 import { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
+
+/////////////// Type
+// color: default, disabled, warning
+// variant: outlined, filled
+// size: small, medium, large
+// value: any string
 
 export default function Button(props) {
   const { color, size, value, variant } = props;
   const Icon = props.icon;
-
-  const IconWrapper = styled("div")(() => ({
-    fontWeight: "bold",
-    cursor: color !== "disabled" ? "pointer" : "default",
-    display: "flex",
-    alignItems: "center",
-    "&:hover": {
-      boxShadow: color !== "disabled" ? "3px 3px 5px #DDD" : undefined,
-      transition: "box-shadow 0.2s ease-out",
-    },
-  }));
-
-  useEffect(() => {
-    setFeature({
-      ...feature,
-      text_color: parseProps().text_color,
-      border_color: parseProps().border_color,
-      bg_color: parseProps().bg_color,
-    });
-  }, [variant, color]);
 
   const parseProps = () => {
     let text_color = "";
@@ -36,18 +21,18 @@ export default function Button(props) {
     switch (size) {
       case "small":
         padding = 5;
-        font_size = 13;
-        border_radius = 20;
+        font_size = 12;
+        border_radius = 8;
         break;
       case "medium":
-        padding = 7;
-        font_size = 15;
-        border_radius = 23;
+        padding = 8;
+        font_size = 17;
+        border_radius = 10;
         break;
       case "large":
-        padding = 9;
-        font_size = 17;
-        border_radius = 25;
+        padding = 10;
+        font_size = 22;
+        border_radius = 12;
         break;
     }
 
@@ -62,8 +47,8 @@ export default function Button(props) {
           border_color = "#D9D9D9";
           bg_color = "#FFFFFF";
         } else {
-          text_color = "#75D1E5";
-          border_color = "#75D1E5";
+          text_color = "#ffcb00";
+          border_color = "#ffcb00";
           bg_color = "#FFFFFF";
         }
         break;
@@ -78,8 +63,8 @@ export default function Button(props) {
           bg_color = "#D9D9D9";
         } else {
           text_color = "#FFFFFF";
-          border_color = "#75D1E5";
-          bg_color = "#75D1E5";
+          border_color = "#ffcb00";
+          bg_color = "#ffcb00";
         }
         break;
       default:
@@ -107,23 +92,46 @@ export default function Button(props) {
     border_radius: parseProps().border_radius,
   });
 
+  useEffect(() => {
+    setFeature({
+      ...feature,
+      text_color: parseProps().text_color,
+      border_color: parseProps().border_color,
+      bg_color: parseProps().bg_color,
+    });
+  }, [variant, color]);
+
   return (
-    <IconWrapper
+    <div
+      className="icon-wrapper"
       style={{
         backgroundColor: feature.bg_color,
         border: `2px solid ${feature.border_color}`,
         color: feature.text_color,
         padding: `${feature.padding}px`,
-        paddingLeft: `calc(${feature.padding}px + 5px)`,
-        paddingRight: `calc(${feature.padding}px + 5px)`,
+        paddingLeft: `calc(${feature.padding}px + 10px)`,
+        paddingRight: `calc(${feature.padding}px + 10px)`,
         fontSize: `${feature.font_size}px`,
         borderRadius: `${feature.border_radius}px`,
         width: "fit-content",
         whiteSpace: "nowrap",
+        fontWeight: "bold",
+        cursor: color !== "disabled" ? "pointer" : "default",
+        display: "flex",
+        alignItems: "center",
+        "&:hover": {
+          boxShadow: color !== "disabled" ? "1px 2px 3px #DDD" : undefined,
+          transition: "box-shadow 0.2s ease-out",
+        },
       }}
     >
-      <Icon fontSize="small" sx={{ paddingRight: "5px", cursor: "inherit" }} />
+      {Icon && (
+        <Icon
+          fontSize="small"
+          sx={{ paddingRight: "5px", cursor: "inherit" }}
+        />
+      )}
       {value.toUpperCase()}
-    </IconWrapper>
+    </div>
   );
 }
