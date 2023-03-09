@@ -7,13 +7,6 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-  redis:
-    pool:
-      min-idle: 0
-      max-idle: 8
-      max-active: 8
-    host: (host)
-    port: 6379
   jpa:
     hibernate:
       ddl-auto: validate
@@ -40,16 +33,9 @@ spring:
     url: ENC(QQKn6Qc6rupTbbhlFtahZtDW6GPHhKdudYrs92kKPhLgqCvBVJ1KkegjuErmDXNwpd41joGBp1Ow6ZONYQD6G7RB+4a4sFHEGU+MGCw07fjpZTFoM+FvnmGN4e3aI754hycxNLhlgrfqy6jNljqiNQ==)
     username: ENC(R8KQRatusCygy4pmV23ZyQ==)
     password: ENC(IZF9vr2JNu30Lj8N25e0Z/qJfI2R6aIU)
-  redis:
-    pool:
-      min-idle: 0
-      max-idle: 8
-      max-active: 8
-    host: (host)
-    port: 6379
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         show_sql: true

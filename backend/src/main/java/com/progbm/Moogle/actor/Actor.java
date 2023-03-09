@@ -1,6 +1,5 @@
 package com.progbm.Moogle.actor;
 
-import com.progbm.Moogle.nation.Nation;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import com.progbm.Moogle.util.Gender;
 import lombok.*;
@@ -29,14 +28,6 @@ public class Actor extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nation_id")
-    private Nation nation;
-
     private String thumbnailUrl;
-
-    public void setNation(Nation nation) {
-        this.nation = nation;
-    }
 
 }
