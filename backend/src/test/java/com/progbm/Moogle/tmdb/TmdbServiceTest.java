@@ -1,11 +1,12 @@
 package com.progbm.Moogle.tmdb;
 
-import com.progbm.Moogle.tmdb.response.*;
+import com.progbm.Moogle.tmdb.response.GenreResponse;
+import com.progbm.Moogle.tmdb.response.OttResponse;
+import com.progbm.Moogle.tmdb.response.PopularMovieResponse;
+import com.progbm.Moogle.tmdb.response.PopularPersonResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 @SpringBootTest
 class TmdbServiceTest {
@@ -23,12 +24,6 @@ class TmdbServiceTest {
     public void getGenres() {
         GenreResponse genres = tmdbService.getGenres();
         System.out.println("genres = " + genres);
-    }
-
-    @Test
-    public void getNations() {
-        List<NationResponse> nations = tmdbService.getNations();
-        System.out.println("nations = " + nations);
     }
 
     @Test
