@@ -1,15 +1,14 @@
 package com.progbm.Moogle.tmdb;
 
-import com.progbm.Moogle.tmdb.response.*;
+import com.progbm.Moogle.tmdb.response.GenreResponse;
+import com.progbm.Moogle.tmdb.response.OttResponse;
+import com.progbm.Moogle.tmdb.response.PopularMovieResponse;
+import com.progbm.Moogle.tmdb.response.PopularPersonResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import javax.print.attribute.standard.Media;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -55,25 +54,6 @@ public class TmdbService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(GenreResponse.class)
-                .block();
-    }
-
-    /**
-     * TMDB API 에서 지원하는 국가 정보를 가져온다.
-     * @return
-     */
-    public List<NationResponse> getNations() {
-        return webClient.mutate()
-                .baseUrl(API_URL)
-                .build()
-                .get()
-                .uri(uriBuilder -> uriBuilder.path("/configuration/countries")
-                        .queryParam("api_key", API_KEY)
-                        .queryParam("language", LANGUAGE)
-                        .queryParam("page", 1).build())
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<NationResponse>>() {})
                 .block();
     }
 

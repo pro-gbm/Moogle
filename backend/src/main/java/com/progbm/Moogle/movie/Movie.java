@@ -1,7 +1,5 @@
 package com.progbm.Moogle.movie;
 
-import com.progbm.Moogle.director.Director;
-import com.progbm.Moogle.nation.Nation;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
 
@@ -36,20 +34,6 @@ public class Movie extends BaseTimeEntity {
 
     @Column(length = 1000)
     private String description;
-
-    // N : 1 관계
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "director_id")
-    private Director director;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nation_id")
-    private Nation nation;
-
-    // N : N 관계 (1 : N 연관 테이블 매핑)
-    @Builder.Default
-    @OneToMany(mappedBy = "movie")
-    private List<MovieActor> movieActors = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "movie")

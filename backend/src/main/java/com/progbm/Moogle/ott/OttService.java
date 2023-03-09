@@ -1,16 +1,11 @@
 package com.progbm.Moogle.ott;
 
-import com.progbm.Moogle.movie.Movie;
-import com.progbm.Moogle.nation.Nation;
-import com.progbm.Moogle.nation.NationRepository;
 import com.progbm.Moogle.tmdb.TmdbService;
-import com.progbm.Moogle.tmdb.response.NationResponse;
 import com.progbm.Moogle.tmdb.response.OttResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Set;

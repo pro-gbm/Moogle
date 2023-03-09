@@ -29,8 +29,6 @@ public class Genre extends BaseTimeEntity {
     @OneToMany(mappedBy = "genre")
     private List<MovieGenre> movieGenres = new ArrayList<>();
 
-//    private Drama drama;
-
     public void addMovieGenre(MovieGenre movieGenre) {
         movieGenres.add(movieGenre);
         movieGenre.updateGenre(this);
