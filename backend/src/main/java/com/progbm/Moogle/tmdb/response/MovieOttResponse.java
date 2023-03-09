@@ -8,15 +8,19 @@ import java.util.List;
 
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class OttResponse {
-    private List<Ott> results;
+public class MovieOttResponse {
+
+    private int id;
+    private List<Nation> results;
 
     @Data
-    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public static class Ott {
-        private int displayPriority;
-        private String logoPath;
-        private String providerName;
-        private int providerId;
+    public static class Nation {
+        private NationOtt KR;
+    }
+
+    @Data
+    public static class NationOtt {
+        private String link;
+        private List<OttResponse.Ott> flatrate;
     }
 }

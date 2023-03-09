@@ -30,4 +30,13 @@ class MovieServiceTest {
         assertThat(movies.isEmpty());
     }
 
+    @Test
+    @DisplayName("영화가 스트리밍되는 OTT 서비스 조회 테스트")
+    public void getMovieOttsTest() {
+        // given
+        movieService.getMovieOtts();
+
+
+    }
+
 }

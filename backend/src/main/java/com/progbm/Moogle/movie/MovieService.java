@@ -3,6 +3,7 @@ package com.progbm.Moogle.movie;
 import com.progbm.Moogle.genre.Genre;
 import com.progbm.Moogle.genre.GenreRepository;
 import com.progbm.Moogle.tmdb.TmdbService;
+import com.progbm.Moogle.tmdb.response.MovieOttResponse;
 import com.progbm.Moogle.tmdb.response.PopularMovieResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -90,5 +91,15 @@ public class MovieService {
                 .collect(Collectors.toList());
 
         movieGenreRepository.saveAll(movieGenres);
+    }
+
+    @Transactional
+    public void getMovieOtts() {
+        // 영화 목록 조회
+        List<Integer> movieTmdbIds = movieRepository.findAll().stream().map(Movie::getTmdbId).collect(Collectors.toList());
+
+
+        MovieOttResponse movieOtts = tmdbService.getMovieOtts(movieTmdbIds.get(0));
+        System.out.println("movieOtts = " + movieOtts);
     }
 }

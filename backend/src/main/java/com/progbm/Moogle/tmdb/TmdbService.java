@@ -113,4 +113,20 @@ public class TmdbService {
                 .bodyToMono(OttResponse.class)
                 .block();
     }
+
+    public MovieOttResponse getMovieOtts(int movieTmdbId) {
+        return webClient.mutate()
+                .baseUrl(API_URL)
+                .build()
+                .get()
+                .uri(uriBuilder -> uriBuilder.path("/movie/" + movieTmdbId + "/watch/providers")
+                        .queryParam("api_key", API_KEY)
+                        .queryParam("language", LANGUAGE)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(MovieOttResponse.class)
+                .block();
+    }
+
 }
