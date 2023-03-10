@@ -95,4 +95,9 @@ public class MovieService {
             });
         });
     }
+
+    //TODO : 추가 예정
+    public void getMovieProvider(int movieId) {
+        tmdbService.getMovieProviders(movieId);
+    }
 }

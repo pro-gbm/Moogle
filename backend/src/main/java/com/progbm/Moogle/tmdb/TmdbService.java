@@ -4,6 +4,7 @@ import com.progbm.Moogle.tmdb.response.GenreResponse;
 import com.progbm.Moogle.tmdb.response.OttResponse;
 import com.progbm.Moogle.tmdb.response.PopularMovieResponse;
 import com.progbm.Moogle.tmdb.response.PopularPersonResponse;
+import com.progbm.Moogle.tmdb.response.MovieProviderResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -92,6 +93,20 @@ public class TmdbService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(OttResponse.class)
+                .block();
+    }
+
+    public MovieProviderResponse getMovieProviders(int movieId) {
+        return webClient.mutate()
+                .baseUrl(API_URL)
+                .build()
+                .get()
+                .uri(uriBuilder -> uriBuilder.path("/movie/" + movieId + "/watch/providers")
+                        .queryParam("api_key",API_KEY)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(MovieProviderResponse.class)
                 .block();
     }
 }

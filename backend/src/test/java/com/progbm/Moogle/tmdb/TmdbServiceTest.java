@@ -1,9 +1,6 @@
 package com.progbm.Moogle.tmdb;
 
-import com.progbm.Moogle.tmdb.response.GenreResponse;
-import com.progbm.Moogle.tmdb.response.OttResponse;
-import com.progbm.Moogle.tmdb.response.PopularMovieResponse;
-import com.progbm.Moogle.tmdb.response.PopularPersonResponse;
+import com.progbm.Moogle.tmdb.response.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,5 +33,11 @@ class TmdbServiceTest {
     public void getOtts() {
         OttResponse ottResponse = tmdbService.getOtts();
         System.out.println("otts = " + ottResponse);
+    }
+
+    @Test
+    public void getMovieProviders() {
+        MovieProviderResponse movieProviderResponse = tmdbService.getMovieProviders(505642);
+        System.out.println("movieProvider = " + movieProviderResponse);
     }
 }
