@@ -12,7 +12,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class MovieProviderResponse {
 
-    int id;
+    private int id;
     private ProviderCountry results;
 
     @Data
