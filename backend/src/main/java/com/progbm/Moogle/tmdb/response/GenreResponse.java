@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class GenreResponse {
 
-    List<MovieGenre> genres;
+    private List<MovieGenre> genres;
 
     @Data
     public static class MovieGenre {
