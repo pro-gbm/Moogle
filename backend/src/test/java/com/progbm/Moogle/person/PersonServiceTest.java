@@ -8,6 +8,7 @@ import com.progbm.Moogle.util.Provider;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ class PersonServiceTest {
     private DirectorService directorService;
 
     @Test
-//    @Transactional
+    @Transactional
     public void savePersonTest() {
         int page = 1;
         personService.savePerson(page);
