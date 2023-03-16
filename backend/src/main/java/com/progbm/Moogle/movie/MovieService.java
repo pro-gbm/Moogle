@@ -101,12 +101,14 @@ public class MovieService {
         });
     }
 
-    //TODO : 추가 예정
+    // Movie Ott 저장
     public void addMovieProvider(int movieId) {
+        // 영화 ID 별 OTT 조회
         MovieProviderResponse movieProviderResponse = tmdbService.getMovieProviders(movieId);
         Movie movie = movieRepository.findByTmdbId(movieId).orElse(null);
         System.out.println("movie : " + movie);
 
+        // DB에 저장되어있는 OTT 정보 호출
         List<Ott> otts = movieProviderResponse.getResults()
                 .getCountry()
                 .getFlatrate()
@@ -115,12 +117,15 @@ public class MovieService {
                 .toList();
         System.out.println("otts : " + otts);
 
+        // 각 OTT 별 MovieOtt 정보 저장
         otts.forEach(ott -> {
             MovieOtt movieOtt = MovieOtt
                     .builder()
                     .movie(movie)
                     .ott(ott)
                     .build();
+            movie.addMovieOtt(movieOtt);
+            ott.addMovieOtt(movieOtt);
             movieOttRepository.save(movieOtt);
         });
     }
