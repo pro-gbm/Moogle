@@ -3,7 +3,7 @@ name: Deploy API to Amazon EC2
 on:
   push:
     branches:
-      - develop
+      - feature/GBM01-24
     paths:
       - 'backend/**'
  
