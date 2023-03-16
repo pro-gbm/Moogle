@@ -2,7 +2,10 @@ package com.progbm.Moogle.movie;
 
 import com.progbm.Moogle.genre.Genre;
 import com.progbm.Moogle.genre.GenreRepository;
+import com.progbm.Moogle.ott.Ott;
+import com.progbm.Moogle.ott.OttRepository;
 import com.progbm.Moogle.tmdb.TmdbService;
+import com.progbm.Moogle.tmdb.response.MovieProviderResponse;
 import com.progbm.Moogle.tmdb.response.PopularMovieResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +26,9 @@ public class MovieService {
 
     private final TmdbService tmdbService;
     private final MovieRepository movieRepository;
-    private final  GenreRepository genreRepository;
+    private final OttRepository ottRepository;
+    private final MovieOttRepository movieOttRepository;
+    private final GenreRepository genreRepository;
     private final MovieGenreRepository movieGenreRepository;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final String IMAGE_URL = "https://image.tmdb.org/t/p/original";
@@ -93,6 +98,30 @@ public class MovieService {
                 // 영화 장르 엔티티 저장
                 movieGenreRepository.save(movieGenre);
             });
+        });
+    }
+
+    //TODO : 추가 예정
+    public void addMovieProvider(int movieId) {
+        MovieProviderResponse movieProviderResponse = tmdbService.getMovieProviders(movieId);
+        Movie movie = movieRepository.findByTmdbId(movieId).orElse(null);
+        System.out.println("movie : " + movie);
+
+        List<Ott> otts = movieProviderResponse.getResults()
+                .getCountry()
+                .getFlatrate()
+                .stream()
+                .map(flatrate -> ottRepository.findByProviderId(flatrate.getProviderId()).orElse(null))
+                .toList();
+        System.out.println("otts : " + otts);
+
+        otts.forEach(ott -> {
+            MovieOtt movieOtt = MovieOtt
+                    .builder()
+                    .movie(movie)
+                    .ott(ott)
+                    .build();
+            movieOttRepository.save(movieOtt);
         });
     }
 }

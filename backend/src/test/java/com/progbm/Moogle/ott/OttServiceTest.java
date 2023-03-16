@@ -26,12 +26,4 @@ public class OttServiceTest {
         System.out.println(otts.size());
         assertThat(otts.isEmpty());
     }
-
-    @Test
-    @DisplayName("MovieProvider 삽입 테스트")
-    @Transactional
-    public void addMovieProvider() {
-        // given
-        ottService.addMovieProvider(505642);
-    }
 }

@@ -31,4 +31,12 @@ class MovieServiceTest {
         assertThat(movies.isEmpty());
     }
 
+    @Test
+    @DisplayName("MovieProvider 삽입 테스트")
+    @Transactional
+    public void addMovieProvider() {
+        // given
+        movieService.addMovieProvider(505642);
+    }
+
 }
