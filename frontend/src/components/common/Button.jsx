@@ -11,6 +11,12 @@ import { useEffect, useState } from "react";
 // icon: icon component
 // iconPosition: front, back
 
+/////////////// Color Chips
+// #e6dedd
+// #8f1d14
+// #1b120f
+// #f89d13
+
 export default function Button(props) {
   const { color, size, value, variant, iconPosition } = props;
   const Icon = props.icon;
@@ -95,32 +101,32 @@ export default function Button(props) {
     switch (variant) {
       case "outlined":
         if (color === "warning") {
-          text_color = "#E2202C";
-          border_color = "#E2202C";
+          text_color = "#8f1d14";
+          border_color = "#8f1d14";
           bg_color = "#FFFFFF";
         } else if (color === "disabled") {
-          text_color = "#D9D9D9";
-          border_color = "#D9D9D9";
+          text_color = "#f2f2f2";
+          border_color = "#f2f2f2";
           bg_color = "#FFFFFF";
         } else {
-          text_color = "#ffcb00";
-          border_color = "#ffcb00";
+          text_color = "#f89d13";
+          border_color = "#f89d13";
           bg_color = "#FFFFFF";
         }
         break;
       case "filled":
         if (color === "warning") {
           text_color = "#FFFFFF";
-          border_color = "#E2202C";
-          bg_color = "#E2202C";
+          border_color = "#8f1d14";
+          bg_color = "#8f1d14";
         } else if (color === "disabled") {
           text_color = "#FFFFFF";
-          border_color = "#D9D9D9";
-          bg_color = "#D9D9D9";
+          border_color = "#e6dedd";
+          bg_color = "#e6dedd";
         } else {
           text_color = "#FFFFFF";
-          border_color = "#ffcb00";
-          bg_color = "#ffcb00";
+          border_color = "#f89d13";
+          bg_color = "#f89d13";
         }
         break;
       default:

@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 const stepper = css({
-  backgroundColor: "yellow",
+  backgroundColor: "#f89d13",
   marginLeft: "5px",
   marginRight: "5px",
   width: "10vw",

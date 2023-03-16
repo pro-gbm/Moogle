@@ -35,7 +35,7 @@ const buttonArea = css({
   display: "flex",
   justifyContent: "space-around",
   alignItems: "center",
-  backgroundColor: "#FFF",
+  // backgroundColor: "#FFF",
 });
 
 function SurveyMain(props) {
