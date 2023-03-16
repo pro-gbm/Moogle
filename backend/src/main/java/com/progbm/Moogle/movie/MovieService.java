@@ -102,10 +102,10 @@ public class MovieService {
     }
 
     // Movie Ott 저장
-    public void addMovieProvider(int movieId) {
+    public void addMovieProvider(int tmdbId) {
         // 영화 ID 별 OTT 조회
-        MovieProviderResponse movieProviderResponse = tmdbService.getMovieProviders(movieId);
-        Movie movie = movieRepository.findByTmdbId(movieId).orElse(null);
+        MovieProviderResponse movieProviderResponse = tmdbService.getMovieProviders(tmdbId);
+        Movie movie = movieRepository.findByTmdbId(tmdbId).orElse(null);
         System.out.println("movie : " + movie);
 
         // DB에 저장되어있는 OTT 정보 호출

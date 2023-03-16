@@ -38,4 +38,6 @@ public class OttService {
     public List<Ott> getOtts() {
         return ottRepository.findAll();
     }
+
+
 }
