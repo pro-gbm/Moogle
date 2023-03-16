@@ -6,13 +6,25 @@ import { CONST } from "../../constants";
 const footer = css({
   height: CONST.FOOTERHEIGHT,
   width: "100%",
-  color: "#FFF",
+  marginLeft: "50px",
+  fontSize: "0.8rem",
+  fontWeight: "lighter",
+  color: "#e6dedd",
   display: "flex",
   alignItems: "center",
+  ".logo": {
+    width: "50px",
+    filter: "grayscale(80%)",
+  },
 });
 
 function SurveyFooter() {
-  return <div css={footer}>여기는 푸터고 pro-gbm 로고가 들어갈거야</div>;
+  return (
+    <div css={footer}>
+      <img src={require("../../assets/turtle.png")} className="logo" />
+      <span>Copyright © 2023 pro-gbm All rights reserved.</span>
+    </div>
+  );
 }
 
 export default SurveyFooter;
