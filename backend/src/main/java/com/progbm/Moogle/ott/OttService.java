@@ -1,5 +1,7 @@
 package com.progbm.Moogle.ott;
 
+import com.progbm.Moogle.movie.MovieOttRepository;
+import com.progbm.Moogle.movie.MovieRepository;
 import com.progbm.Moogle.tmdb.TmdbService;
 import com.progbm.Moogle.tmdb.response.OttResponse;
 import lombok.RequiredArgsConstructor;
@@ -36,4 +38,6 @@ public class OttService {
     public List<Ott> getOtts() {
         return ottRepository.findAll();
     }
+
+
 }

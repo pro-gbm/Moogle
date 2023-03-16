@@ -24,4 +24,12 @@ public class MovieOtt extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ott_id")
     private Ott ott;
+
+    public void updateMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public void updateOtt(Ott ott) {
+        this.ott = ott;
+    }
 }

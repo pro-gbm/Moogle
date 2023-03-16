@@ -35,4 +35,14 @@ public class Ott extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "ott")
     private List<MovieOtt> movieOtts = new ArrayList<>();
+
+    public void addMovieOtt(MovieOtt movieOtt) {
+        movieOtts.add(movieOtt);
+        movieOtt.updateOtt(this);
+    }
+
+    public void deleteMovieOtt(MovieOtt movieOtt) {
+        movieOtts.remove(movieOtt);
+        movieOtt.updateOtt(null);
+    }
 }

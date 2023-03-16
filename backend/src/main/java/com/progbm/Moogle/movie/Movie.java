@@ -52,4 +52,14 @@ public class Movie extends BaseTimeEntity {
         movieGenres.remove(movieGenre);
         movieGenre.updateMovie(null);
     }
+
+    public void addMovieOtt(MovieOtt movieOtt) {
+        movieOtts.add(movieOtt);
+        movieOtt.updateMovie(this);
+    }
+
+    public void deleteMovieOtt(MovieOtt movieOtt) {
+        movieOtts.remove(movieOtt);
+        movieOtt.updateMovie(null);
+    }
 }
