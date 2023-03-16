@@ -2,10 +2,12 @@ package com.progbm.Moogle.ott;
 
 import com.progbm.Moogle.movie.MovieOtt;
 import com.progbm.Moogle.util.BaseTimeEntity;
-import com.progbm.Moogle.util.Quality;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +31,6 @@ public class Ott extends BaseTimeEntity {
     private Integer price;
 
     private Byte personnel;
-
-    @Enumerated(EnumType.STRING)
-    private Quality quality;
 
     @OneToMany(mappedBy = "ott")
     private List<MovieOtt> movieOtts = new ArrayList<>();

@@ -24,5 +24,13 @@ public class PopularPersonResponse {
         private int gender; // 1: FEMALE, 2: MALE
         private String profilePath; // string or null
         private String knownForDepartment; // Acting, Directing
+        private List<KnownFor> knownFor;
+    }
+
+    @Data
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public static class KnownFor {
+        private int id;
+        private String mediaType;
     }
 }

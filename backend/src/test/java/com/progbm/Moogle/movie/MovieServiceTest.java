@@ -33,7 +33,7 @@ class MovieServiceTest {
 
     @Test
     @DisplayName("MovieProvider 삽입 테스트")
-    /*@Transactional*/
+    @Transactional
     public void addMovieProvider() {
         // given
         movieService.addMovieProvider(505642);

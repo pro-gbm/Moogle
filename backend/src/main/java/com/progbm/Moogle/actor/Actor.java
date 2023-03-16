@@ -2,6 +2,7 @@ package com.progbm.Moogle.actor;
 
 import com.progbm.Moogle.util.BaseTimeEntity;
 import com.progbm.Moogle.util.Gender;
+import com.progbm.Moogle.util.Provider;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,5 +30,8 @@ public class Actor extends BaseTimeEntity {
     private Gender gender;
 
     private String thumbnailUrl;
+
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
 
 }
