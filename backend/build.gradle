@@ -88,3 +88,8 @@ configurations {
 	}
 	querydsl.extendsFrom compileClasspath
 }
+
+// code deploy test
+jar {
+	enabled = false
+}
