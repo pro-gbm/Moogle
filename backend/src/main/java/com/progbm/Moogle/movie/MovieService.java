@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,8 +56,6 @@ public class MovieService {
                         .description(popularMovie.getOverview())
                         .build();
 
-                System.out.println("movie.getMovieGenres() = " + movie.getMovieGenres());
-
                 // 장르 목록 추가
                 this.addGenres(movie, popularMovie.getGenreIds());
                 return movie;
@@ -78,17 +78,13 @@ public class MovieService {
         // 장르 id 리스트로 장르 리스트 조회
         List<Genre> genres = genreIds.stream()
                 .map(genreId -> genreRepository.findByTmdbId(genreId).orElse(null))
-                .filter(genre -> genre != null)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-
-        System.out.println("genres = " + genres);
 
         // 영화 장르 엔티티로 만들어서 저장하기
         List<MovieGenre> movieGenres = genres.stream()
                 .map(genre -> MovieGenre.builder().movie(movie).genre(genre).build())
                 .collect(Collectors.toList());
-
-        System.out.println("movieGenres = " + movieGenres);
 
         // 영화, 장르 엔티티에 영화 장르 엔티티 넣기
         movieGenres.forEach(movieGenre -> {
@@ -105,8 +101,11 @@ public class MovieService {
     public void addMovieProvider(int tmdbId) {
         // 영화 ID 별 OTT 조회
         MovieProviderResponse movieProviderResponse = tmdbService.getMovieProviders(tmdbId);
-        Movie movie = movieRepository.findByTmdbId(tmdbId).orElse(null);
-        System.out.println("movie : " + movie);
+        Optional<Movie> movieOptional = movieRepository.findByTmdbId(tmdbId);
+        if(movieOptional.isEmpty()){
+            return;
+        }
+        Movie movie = movieOptional.get();
 
         // DB에 저장되어있는 OTT 정보 호출
         List<Ott> otts = movieProviderResponse.getResults()
@@ -114,9 +113,8 @@ public class MovieService {
                 .getFlatrate()
                 .stream()
                 .map(flatrate -> ottRepository.findByProviderId(flatrate.getProviderId()).orElse(null))
+                .filter(Objects::nonNull)
                 .toList();
-        System.out.println("otts : " + otts);
-
         // 각 OTT 별 MovieOtt 정보 저장
         otts.forEach(ott -> {
             MovieOtt movieOtt = MovieOtt
