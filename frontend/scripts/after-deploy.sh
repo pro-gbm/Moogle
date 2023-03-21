@@ -11,6 +11,7 @@ cd $PROJECT_ROOT
 TIME_NOW=$(date +%c)
 
 echo "$TIME_NOW > START" >> $DEPLOY_LOG
+sudo npm install
 sudo npm start &
 echo "$TIME_NOW > END" >> $DEPLOY_LOG
 
