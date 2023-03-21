@@ -3,7 +3,7 @@ name: Deploy Web to Amazon EC2
 on:
   push:
     branches:
-      - develop
+      - feature/GBM-24
     paths:
       - 'frontend/**'
 
@@ -12,7 +12,7 @@ env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: mooglebucket-front
   CODE_DEPLOY_APPLICATION_NAME: MoogleCodeDeployApp
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: MoogleCodeDeployApp-group
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: MoogleCodeDeployApp-group-front
   WORKDIR: ./frontend
 
 permissions:
