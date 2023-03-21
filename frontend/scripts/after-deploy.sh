@@ -1,8 +1,8 @@
 #!/bin/bash
 PROJECT_ROOT="/home/ubuntu/app/frontend/build"
-APP_LOG="$PROJECT_ROOT/log/application.log"
-ERROR_LOG="$PROJECT_ROOT/log/error.log"
-DEPLOY_LOG="$PROJECT_ROOT/log/deploy.log"
+APP_LOG="/home/ubuntu/app/frontend/log/application_front.log"
+ERROR_LOG="/home/ubuntu/app/log/error_front.log"
+DEPLOY_LOG="/home/ubuntu/app/log/deploy_front.log"
 
 
 cd $PROJECT_ROOT
