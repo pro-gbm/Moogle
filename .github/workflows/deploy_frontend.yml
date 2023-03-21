@@ -3,7 +3,7 @@ name: Deploy Web to Amazon EC2
 on:
   push:
     branches:
-      - feature/GBM01-24
+      - develop
     paths:
       - 'frontend/**'
 
