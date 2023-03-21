@@ -1,10 +1,21 @@
-import Stepper from './Stepper';
-import { CONST } from '../../constants';
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
+import Stepper from "./Stepper";
+import { CONST } from "../../constants";
+
+const header = css({
+  height: CONST.HEADERHEIGHT,
+  ".steppers": {
+    marginTop: CONST.HEADERHEIGHT * 0.4,
+    display: "flex",
+  },
+});
 
 function SurveyHeader() {
   return (
-    <div style={{ height: CONST.HEADERHEIGHT }}>
-      <div style={{ marginTop: CONST.HEADERHEIGHT * 0.4, display: 'flex' }}>
+    <div css={header}>
+      <div className="steppers">
         <Stepper />
         <Stepper />
         <Stepper />

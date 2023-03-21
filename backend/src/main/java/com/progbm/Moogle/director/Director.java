@@ -2,6 +2,7 @@ package com.progbm.Moogle.director;
 
 import com.progbm.Moogle.util.BaseTimeEntity;
 import com.progbm.Moogle.util.Gender;
+import com.progbm.Moogle.util.Provider;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,4 +29,6 @@ public class Director extends BaseTimeEntity {
 
     private String thumbnailUrl;
 
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
 }

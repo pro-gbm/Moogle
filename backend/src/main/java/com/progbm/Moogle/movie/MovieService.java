@@ -2,7 +2,10 @@ package com.progbm.Moogle.movie;
 
 import com.progbm.Moogle.genre.Genre;
 import com.progbm.Moogle.genre.GenreRepository;
+import com.progbm.Moogle.ott.Ott;
+import com.progbm.Moogle.ott.OttRepository;
 import com.progbm.Moogle.tmdb.TmdbService;
+import com.progbm.Moogle.tmdb.response.MovieProviderResponse;
 import com.progbm.Moogle.tmdb.response.PopularMovieResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,7 +28,9 @@ public class MovieService {
 
     private final TmdbService tmdbService;
     private final MovieRepository movieRepository;
-    private final  GenreRepository genreRepository;
+    private final OttRepository ottRepository;
+    private final MovieOttRepository movieOttRepository;
+    private final GenreRepository genreRepository;
     private final MovieGenreRepository movieGenreRepository;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final String IMAGE_URL = "https://image.tmdb.org/t/p/original";
@@ -49,8 +56,6 @@ public class MovieService {
                         .description(popularMovie.getOverview())
                         .build();
 
-                System.out.println("movie.getMovieGenres() = " + movie.getMovieGenres());
-
                 // 장르 목록 추가
                 this.addGenres(movie, popularMovie.getGenreIds());
                 return movie;
@@ -73,17 +78,13 @@ public class MovieService {
         // 장르 id 리스트로 장르 리스트 조회
         List<Genre> genres = genreIds.stream()
                 .map(genreId -> genreRepository.findByTmdbId(genreId).orElse(null))
-                .filter(genre -> genre != null)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-
-        System.out.println("genres = " + genres);
 
         // 영화 장르 엔티티로 만들어서 저장하기
         List<MovieGenre> movieGenres = genres.stream()
                 .map(genre -> MovieGenre.builder().movie(movie).genre(genre).build())
                 .collect(Collectors.toList());
-
-        System.out.println("movieGenres = " + movieGenres);
 
         // 영화, 장르 엔티티에 영화 장르 엔티티 넣기
         movieGenres.forEach(movieGenre -> {
@@ -96,8 +97,34 @@ public class MovieService {
         });
     }
 
-    //TODO : 추가 예정
-    public void getMovieProvider(int movieId) {
-        tmdbService.getMovieProviders(movieId);
+    // Movie Ott 저장
+    public void addMovieProvider(int tmdbId) {
+        // 영화 ID 별 OTT 조회
+        MovieProviderResponse movieProviderResponse = tmdbService.getMovieProviders(tmdbId);
+        Optional<Movie> movieOptional = movieRepository.findByTmdbId(tmdbId);
+        if(movieOptional.isEmpty()){
+            return;
+        }
+        Movie movie = movieOptional.get();
+
+        // DB에 저장되어있는 OTT 정보 호출
+        List<Ott> otts = movieProviderResponse.getResults()
+                .getCountry()
+                .getFlatrate()
+                .stream()
+                .map(flatrate -> ottRepository.findByProviderId(flatrate.getProviderId()).orElse(null))
+                .filter(Objects::nonNull)
+                .toList();
+        // 각 OTT 별 MovieOtt 정보 저장
+        otts.forEach(ott -> {
+            MovieOtt movieOtt = MovieOtt
+                    .builder()
+                    .movie(movie)
+                    .ott(ott)
+                    .build();
+            movie.addMovieOtt(movieOtt);
+            ott.addMovieOtt(movieOtt);
+            movieOttRepository.save(movieOtt);
+        });
     }
 }
