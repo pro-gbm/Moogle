@@ -1,40 +1,40 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
-import Button from "../common/Button";
-import Option from "./Option";
+import Button from '../common/Button';
+import Option from './Option';
 
 const surveyMain = css({
-  width: "80%",
-  height: "100%",
-  marginTop: "50px",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  color: "#FFF",
-  ".title": {
-    fontSize: "2rem",
-    marginLeft: "15%",
-    marginRight: "15%",
+  width: '80%',
+  height: '100%',
+  marginTop: '50px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  color: '#FFF',
+  '.title': {
+    fontSize: '2rem',
+    marginLeft: '15%',
+    marginRight: '15%',
   },
-  ".description": {
-    marginLeft: "15%",
-    marginRight: "15%",
-    marginBottom: "30px",
+  '.description': {
+    marginLeft: '15%',
+    marginRight: '15%',
+    marginBottom: '30px',
   },
-  ".options": {
-    minHeight: "75%",
-    maxHeight: "80%",
+  '.options': {
+    minHeight: '75%',
+    maxHeight: '80%',
   },
 });
 
 const buttonArea = css({
-  height: "7%",
-  marginLeft: "25%",
-  marginRight: "25%",
-  display: "flex",
-  justifyContent: "space-around",
-  alignItems: "center",
+  height: '7%',
+  marginLeft: '25%',
+  marginRight: '25%',
+  display: 'flex',
+  justifyContent: 'space-around',
+  alignItems: 'center',
   // backgroundColor: "#FFF",
 });
 
