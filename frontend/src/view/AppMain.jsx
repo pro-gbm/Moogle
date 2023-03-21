@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 function AppMain() {
+    console.log('테스트!!!')
   return (
     <Fragment>
       <div
