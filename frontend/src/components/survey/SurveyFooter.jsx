@@ -21,7 +21,7 @@ const footer = css({
 function SurveyFooter() {
   return (
     <div css={footer}>
-      <img src={require("../../assets/turtle.png")} className="logo" />
+      <img src={require("../../assets/turtle.png")} className="logo"  alt="turtle"/>
       <span>Copyright © 2023 pro-gbm All rights reserved.</span>
     </div>
   );
