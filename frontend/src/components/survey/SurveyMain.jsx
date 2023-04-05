@@ -53,6 +53,7 @@ function SurveyMain(props) {
         ))}
       </div>
       <div css={buttonArea}>
+        {/*
         <Button
           color="warning"
           size="large"
@@ -67,6 +68,7 @@ function SurveyMain(props) {
           variant="filled"
           iconPosition="back"
         />
+        */}
       </div>
     </div>
   );

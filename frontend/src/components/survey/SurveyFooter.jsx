@@ -26,7 +26,7 @@ function SurveyFooter() {
         className="logo"
         alt="turtle"
       />
-      <span>Copyright © 2023 pro-gbm All rights reserved.</span>
+      <span>Copyright © 2023 pro-gbm All rights reserved.op</span>
     </div>
   );
 }
