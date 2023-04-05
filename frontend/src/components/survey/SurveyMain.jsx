@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-import Button from '../common/Button';
+// import Button from '../common/Button';
 import Option from './Option';
 
 const surveyMain = css({
