@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - feature/GBM01-24
-    paths:
-      - 'frontend/**'
+#    paths:
+#      - 'frontend/**'
 
 # 리전, 버킷 이름, CodeDeploy 앱 이름, CodeDeploy 배포 그룹 이름
 env:
