@@ -4,7 +4,7 @@
 PROJECT_ROOT="/home/ubuntu/app/backend"
 JAR_FILE="$PROJECT_ROOT/spring-webapp.jar"
 
-APP_LOG="/home/ubuntu/app/log/application_Backend.log"
+APP_LOG="/home/ubuntu/app/log/application_backend.log"
 ERROR_LOG="/home/ubuntu/app/log/error_backend.log"
 DEPLOY_LOG="/home/ubuntu/app/log/deploy_backend.log"
 
@@ -13,7 +13,7 @@ ENC_KEY=${ENC_KEY}
 
 # build 파일 복사
 echo "$TIME_NOW > $JAR_FILE 파일 복사" >> $DEPLOY_LOG
-cp $PROJECT_ROOT/build/libs/*.jar $JAR_FILE
+mv $PROJECT_ROOT/build/libs/*.jar $JAR_FILE
 
 # jar 파일 실행
 echo "$TIME_NOW > $JAR_FILE 파일 실행" >> $DEPLOY_LOG
