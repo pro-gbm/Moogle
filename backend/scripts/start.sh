@@ -4,9 +4,9 @@
 PROJECT_ROOT="/home/ubuntu/app/backend"
 JAR_FILE="$PROJECT_ROOT/spring-webapp.jar"
 
-APP_LOG="$PROJECT_ROOT/application.log"
-ERROR_LOG="$PROJECT_ROOT/error.log"
-DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
+APP_LOG="/home/ubuntu/app/log/application_Backend.log"
+ERROR_LOG="/home/ubuntu/app/log/error_backend.log"
+DEPLOY_LOG="/home/ubuntu/app/log/deploy_backend.log"
 
 TIME_NOW=$(date +%c)
 ENC_KEY=${ENC_KEY}
