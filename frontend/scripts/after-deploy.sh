@@ -12,7 +12,7 @@ TIME_NOW=$(date +%c)
 
 echo "$TIME_NOW > START" >> $DEPLOY_LOG
 sudo npm install
-sudo npm start &
+sudo npm start > /dev/null 2> /dev/null < /dev/null &
 echo "$TIME_NOW > END" >> $DEPLOY_LOG
 
 
