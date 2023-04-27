@@ -27,6 +27,26 @@ public class PersonService {
     private final OttRepository ottRepository;
 
     /**
+     * 감독 조회
+     * @return
+     */
+    public List<Director> getDirectors() {
+        List<Director> director = directorRepository.findAll();
+
+        return director;
+    }
+
+    /**
+     * 배우 조회
+     * @return
+     */
+    public List<Actor> getActors() {
+        List<Actor> actors = actorRepository.findAll();
+
+        return actors;
+    }
+
+    /**
      * TMDB API 에서 유명인 데이터 중 배우, 감독을 구분하여 저장
      */
     @Transactional
