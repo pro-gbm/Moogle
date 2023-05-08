@@ -1,5 +1,6 @@
 package com.progbm.Moogle.ott;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.progbm.Moogle.movie.MovieOtt;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
@@ -32,6 +33,7 @@ public class Ott extends BaseTimeEntity {
 
     private Byte personnel;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ott")
     private List<MovieOtt> movieOtts = new ArrayList<>();
 

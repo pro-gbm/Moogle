@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -77,7 +76,7 @@ public class ApiController {
     /**
      * 전체 질문에 대한 응답을 받고, 추천 OTT 를 반환하는 API
      */
-    @PostMapping
+    @PostMapping("/answer")
     public ResponseEntity allResponseFromClient() {
 
         return ResponseEntity.status(HttpStatus.OK).build();
