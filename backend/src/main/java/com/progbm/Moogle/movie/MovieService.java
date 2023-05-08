@@ -45,7 +45,7 @@ public class MovieService {
 
         for (int i = 1; i <= page; i++) {
             // 인기 영화 목록 응답을 영화 엔티티 목록으로 가공
-            PopularMovieResponse popularMovies = tmdbService.getPopularMovies(page);
+            PopularMovieResponse popularMovies = tmdbService.getPopularMovies(i);
             List<Movie> movies = popularMovies.getResults().stream().map(popularMovie -> {
                 Movie movie = Movie.builder()
                         .tmdbId(popularMovie.getId())
