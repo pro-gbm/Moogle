@@ -1,5 +1,6 @@
 package com.progbm.Moogle.genre;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.progbm.Moogle.movie.MovieGenre;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
@@ -26,6 +27,7 @@ public class Genre extends BaseTimeEntity {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "genre")
     private List<MovieGenre> movieGenres = new ArrayList<>();
 
