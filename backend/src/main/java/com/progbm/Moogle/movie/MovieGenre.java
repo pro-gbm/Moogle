@@ -1,5 +1,6 @@
 package com.progbm.Moogle.movie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.progbm.Moogle.genre.Genre;
 import com.progbm.Moogle.util.BaseTimeEntity;
 import lombok.*;
@@ -17,10 +18,12 @@ public class MovieGenre extends BaseTimeEntity {
     @GeneratedValue
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
