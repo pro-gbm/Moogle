@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { routers } from "./router";
 
-function App() {
+const App = () => {
   return (
     <div className="container">
       <Routes>
@@ -18,6 +18,6 @@ function App() {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;
