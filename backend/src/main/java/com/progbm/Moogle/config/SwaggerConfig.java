@@ -20,7 +20,7 @@ public class SwaggerConfig {
     @Bean
     public Docket swaggerAPI() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .host("ec2-52-78-112-34.ap-northeast-2.compute.amazonaws.com")
+                .host("52.78.118.174")
                 .apiInfo(this.swaggerInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.progbm.Moogle"))
