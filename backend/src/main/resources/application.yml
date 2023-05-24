@@ -25,6 +25,10 @@ jasypt:
     bean: jasyptStringEncryptor
 
 --- # 배포
+#server.port: 8080
+swagger:
+  port: 8080
+
 spring:
   profiles:
     active: prod
