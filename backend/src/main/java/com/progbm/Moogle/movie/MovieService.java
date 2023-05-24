@@ -47,6 +47,11 @@ public class MovieService {
             // 인기 영화 목록 응답을 영화 엔티티 목록으로 가공
             PopularMovieResponse popularMovies = tmdbService.getPopularMovies(i);
             List<Movie> movies = popularMovies.getResults().stream().map(popularMovie -> {
+                // 개봉일이 null 인 경우 LocalDate.parse 에러 방지용으로 default 값 추가
+                if (Objects.isNull(popularMovie.getReleaseDate())) {
+                    popularMovie.setReleaseDate("2023-01-01");
+                }
+
                 Movie movie = Movie.builder()
                         .tmdbId(popularMovie.getId())
                         .title(popularMovie.getTitle())
