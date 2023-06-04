@@ -46,6 +46,14 @@ public class PersonService {
         return actors;
     }
 
+    public Actor getActor(Long id) {
+        return actorRepository.findById(id).orElse(null);
+    }
+
+    public Director getDirector(Long id) {
+        return directorRepository.findById(id).orElse(null);
+    }
+
     /**
      * TMDB API 에서 유명인 데이터 중 배우, 감독을 구분하여 저장
      */
@@ -152,6 +160,44 @@ public class PersonService {
             return provider;
         } catch (Exception e) {
             return Provider.DISNEY;
+        }
+    }
+
+    public void countPeopleOtt(Map<Provider, Integer> map, List<Long> actorIds, List<Long> directorIds) {
+        // 배우 목록에서 OTT 갯수 추가
+        if (actorIds != null) {
+            for (Long actorId : actorIds) {
+                Actor actor = this.getActor(actorId);
+                if (actor == null) {
+                    continue;
+                }
+
+                Provider provider = actor.getProvider();
+                if (provider == null) {
+                    continue;
+                }
+
+                Integer count = map.getOrDefault(provider, 0);
+                map.put(provider, count + 1);
+            }
+        }
+
+        // 감독 목록에서 OTT 갯수 추가
+        if (directorIds != null) {
+            for (Long directorId : directorIds) {
+                Director director = this.getDirector(directorId);
+                if (director == null) {
+                    continue;
+                }
+
+                Provider provider = director.getProvider();
+                if (provider == null) {
+                    continue;
+                }
+
+                Integer count = map.getOrDefault(provider, 0);
+                map.put(provider, count + 1);
+            }
         }
     }
 }

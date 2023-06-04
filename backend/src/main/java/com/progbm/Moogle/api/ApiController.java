@@ -7,13 +7,18 @@ import com.progbm.Moogle.genre.GenreService;
 import com.progbm.Moogle.movie.Movie;
 import com.progbm.Moogle.movie.MovieService;
 import com.progbm.Moogle.person.PersonService;
+import com.progbm.Moogle.request.AnswerRequest;
 import com.progbm.Moogle.response.ResponseService;
 import com.progbm.Moogle.response.dto.DataResponse;
+import com.progbm.Moogle.util.Provider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -77,9 +82,31 @@ public class ApiController {
      * 전체 질문에 대한 응답을 받고, 추천 OTT 를 반환하는 API
      */
     @PostMapping("/answer")
-    public ResponseEntity allResponseFromClient() {
+    public ResponseEntity allResponseFromClient(@RequestParam AnswerRequest request) {
+        Map<Provider, Integer> map = new EnumMap<>(Provider.class);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        // 1. 영화 목록에서 OTT 갯수 추가
+        movieService.countMovieOtt(map, request.getMovies());
+
+        // 2. 배우, 감독 목록에서 OTT 갯수 추가
+        personService.countPeopleOtt(map, request.getActors(), request.getDirectors());
+
+        // 3. 맵을 순회하면서 가장 많은 갯수를 가지는 ott 를 불러온다
+        String result = Provider.NETFLIX.toString();
+        int count = map.get(Provider.NETFLIX);
+        for (Map.Entry<Provider, Integer> entry : map.entrySet()) {
+            String key = entry.getKey().toString();
+            int value = entry.getValue();
+
+            if (value > count) {
+                result = key;
+                count = value;
+            }
+        }
+
+        DataResponse response = responseService.getDataResponse(result, HttpStatus.OK);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
 }

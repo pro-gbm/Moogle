@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,4 +53,36 @@ class PersonServiceTest {
 
         System.out.println("provider = " + provider);
     }
+
+    @Test
+    public void countPeopleOttTest() {
+        // given
+        List<Long> actorIds = personService.getActors().stream().map(Actor::getId).toList();
+        List<Long> directorIds = personService.getDirectors().stream().map(Director::getId).toList();
+
+        // when
+        Map<Provider, Integer> map = new EnumMap<>(Provider.class);
+        personService.countPeopleOtt(map, actorIds, directorIds);
+
+        // then
+        String result = Provider.NETFLIX.toString();
+        int count = map.get(Provider.NETFLIX);
+        for (Map.Entry<Provider, Integer> entry : map.entrySet()) {
+            String key = entry.getKey().toString();
+            int value = entry.getValue();
+
+            if (value > count) {
+                result = key;
+                count = value;
+            }
+        }
+
+        for (Map.Entry<Provider, Integer> entry : map.entrySet()) {
+            System.out.println("***********************");
+            System.out.println("OTT = " + entry.getKey());
+            System.out.println("count = " + entry.getValue());
+            System.out.println("***********************");
+        }
+    }
+
 }
