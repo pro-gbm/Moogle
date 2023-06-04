@@ -16,4 +16,19 @@ public enum Provider {
         this.name = name;
         this.providerId = providerId;
     }
+
+    /**
+     * 이름을 받아서 Provider 반환. default 는 NETFLIX
+     * @param name
+     * @return
+     */
+    public static Provider getProvider(String name) {
+        Provider[] values = Provider.values();
+        for (Provider provider : values) {
+            if (provider.name.equals(name)) {
+                return provider;
+            }
+        }
+        return Provider.NETFLIX;
+    }
 }

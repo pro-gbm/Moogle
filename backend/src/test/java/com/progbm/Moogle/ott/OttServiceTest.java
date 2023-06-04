@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class OttServiceTest {
     private OttService ottService;
     @Test
     @DisplayName("OTT 저장 테스트")
-    @Transactional
+//    @Transactional
     public void OttsSaveTest() {
         // given
         ottService.saveOtts();
