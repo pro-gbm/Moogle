@@ -1,5 +1,7 @@
-function AppResult() {
+import React from "react";
+
+const AppResult = () => {
   return <div>결과</div>;
-}
+};
 
 export default AppResult;
