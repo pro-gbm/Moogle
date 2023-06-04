@@ -82,7 +82,7 @@ public class ApiController {
      * 전체 질문에 대한 응답을 받고, 추천 OTT 를 반환하는 API
      */
     @PostMapping("/answer")
-    public ResponseEntity allResponseFromClient(@RequestParam AnswerRequest request) {
+    public ResponseEntity allResponseFromClient(@RequestBody AnswerRequest request) {
         Map<Provider, Integer> map = new EnumMap<>(Provider.class);
 
         // 1. 영화 목록에서 OTT 갯수 추가
