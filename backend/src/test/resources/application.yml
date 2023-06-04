@@ -30,3 +30,8 @@ logging.level:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+
+--- # 배포
+#server.port: 8080
+swagger:
+  port: 8080
