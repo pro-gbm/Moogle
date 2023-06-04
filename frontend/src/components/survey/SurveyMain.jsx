@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 
 // import Button from '../common/Button';
 import Option from './Option';
+import axios from 'axios';
 
 const surveyMain = css({
   width: '80%',
@@ -40,10 +41,28 @@ const buttonArea = css({
 
 function SurveyMain(props) {
   const { data } = props;
+  const URL = 'http://52.78.118.174:8080';
+
+  const getTestApi = async (param) => {
+    try {
+      console.log('파라미터', param);
+      let res = await axios.get(`${URL}/api/question/2`);
+      console.log('결과는', res);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  };
 
   return (
     <div css={surveyMain}>
-      <div className="title">
+      <div
+        className="title"
+        onClick={() => {
+          let param = {};
+          getTestApi(param);
+        }}
+      >
         {data.id}. {data.title}
       </div>
       <div className="description">{data.description}</div>
@@ -53,6 +72,12 @@ function SurveyMain(props) {
         ))}
       </div>
       <div css={buttonArea}>
+        <img
+          src="https://image.tmdb.org/t/p/original/3FyO7Z8WigeCQsUpW4B1x3qfmFx.jpg"
+          alt="헬렌.."
+          height="100px"
+          width="100px"
+        />
         {/*
         <Button
           color="warning"
