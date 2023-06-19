@@ -44,8 +44,7 @@ const buttonArea = css({
 });
 
 function SurveyMain(props) {
-  // const { data } = props;
-  // const URL = 'http://52.78.118.174:8080';
+  const { passCurrentQuestion } = props;
   const [qData, setQData] = useState({
     qId: 0,
     qTitle: '',
@@ -119,20 +118,38 @@ function SurveyMain(props) {
           width="100px"
         /> */}
 
-        <Button
-          color="default"
-          size="large"
-          value="Prev"
-          variant="filled"
-          iconPosition="back"
-        />
-        <Button
-          color="default"
-          size="large"
-          value="Next"
-          variant="filled"
-          iconPosition="back"
-        />
+        <div
+          onClick={() => {
+            if (currentQuestion > 1) {
+              setCurrentQuestion(currentQuestion - 1);
+              passCurrentQuestion(currentQuestion - 1);
+            }
+          }}
+        >
+          <Button
+            color="default"
+            size="large"
+            value="Prev"
+            variant="filled"
+            iconPosition="back"
+          />
+        </div>
+        <div
+          onClick={() => {
+            if (currentQuestion < 4) {
+              setCurrentQuestion(currentQuestion + 1);
+              passCurrentQuestion(currentQuestion + 1);
+            }
+          }}
+        >
+          <Button
+            color="default"
+            size="large"
+            value="Next"
+            variant="filled"
+            iconPosition="back"
+          />
+        </div>
       </div>
     </div>
   );
