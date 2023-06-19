@@ -5,10 +5,11 @@ import Button from '../common/Button';
 import Option from './Option';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { CONST, URL } from '../../constants';
 
 const surveyMain = css({
   width: '80%',
-  height: '100%',
+  height: `calc(100vh - ${CONST.HEADERHEIGHT}px - ${CONST.FOOTERHEIGHT}px)`,
   marginTop: '50px',
   display: 'flex',
   flexDirection: 'column',
@@ -25,8 +26,8 @@ const surveyMain = css({
     marginBottom: '30px',
   },
   '.options': {
-    minHeight: '75%',
-    maxHeight: '80%',
+    maxHeight: '65%',
+    overflow: 'scroll',
   },
 });
 
@@ -40,24 +41,23 @@ const buttonArea = css({
   '@media (max-width: 800px)': {
     flexDirection: 'column',
   },
-  // backgroundColor: "#FFF",
 });
 
 function SurveyMain(props) {
   // const { data } = props;
-  const URL = 'http://52.78.118.174:8080';
+  // const URL = 'http://52.78.118.174:8080';
   const [qData, setQData] = useState({
     qId: 0,
-    qTitle: "",
-    qDescription: "",
-    qOption: []
+    qTitle: '',
+    qDescription: '',
+    qOption: [],
   });
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState({
     genres: [],
     movies: [],
     directors: [],
-    actors: []
+    actors: [],
   });
 
   const getTestApi = async (param) => {
@@ -83,16 +83,16 @@ function SurveyMain(props) {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getQuestionApi(1).then((res) => {
       setQData({
         qId: 1,
-        qTitle: res.data.qTitle,  // res.data가 아니라 프론트 더미데이터로 바꿔야 함
-        qDescription: res.data.qDescription,  // res.data가 아니라 프론트 더미데이터로 바꿔야 함
-        qOption: [...res.data.qOption]
-      })
+        qTitle: CONST.TITLES[0],
+        qDescription: CONST.DESCRIPTIONS[0],
+        qOption: [...res.data.data],
+      });
     });
-  },[]);
+  }, []);
 
   return (
     <div css={surveyMain}>
@@ -108,7 +108,7 @@ function SurveyMain(props) {
       <div className="description">{qData.qDescription}</div>
       <div className="options">
         {qData.qOption.map((option, index) => (
-          <Option key={`${option.id}-${index}`} data={option} />
+          <Option key={`${option.id}-${index}`} data={option.name} />
         ))}
       </div>
       <div css={buttonArea}>
