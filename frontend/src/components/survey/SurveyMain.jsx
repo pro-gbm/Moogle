@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-// import Button from '../common/Button';
+import Button from '../common/Button';
 import Option from './Option';
 import axios from 'axios';
 
@@ -31,11 +31,14 @@ const surveyMain = css({
 
 const buttonArea = css({
   height: '7%',
-  marginLeft: '25%',
-  marginRight: '25%',
+  marginLeft: '15%',
+  marginRight: '15%',
   display: 'flex',
   justifyContent: 'space-around',
   alignItems: 'center',
+  '@media (max-width: 800px)': {
+    flexDirection: 'column',
+  },
   // backgroundColor: "#FFF",
 });
 
@@ -72,15 +75,15 @@ function SurveyMain(props) {
         ))}
       </div>
       <div css={buttonArea}>
-        <img
+        {/* <img
           src="https://image.tmdb.org/t/p/original/3FyO7Z8WigeCQsUpW4B1x3qfmFx.jpg"
           alt="헬렌.."
           height="100px"
           width="100px"
-        />
-        {/*
+        /> */}
+
         <Button
-          color="warning"
+          color="default"
           size="large"
           value="Prev"
           variant="filled"
@@ -88,12 +91,11 @@ function SurveyMain(props) {
         />
         <Button
           color="default"
-          size="medium"
+          size="large"
           value="Next"
           variant="filled"
           iconPosition="back"
         />
-        */}
       </div>
     </div>
   );
