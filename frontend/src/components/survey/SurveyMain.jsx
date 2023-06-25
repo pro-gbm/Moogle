@@ -6,6 +6,7 @@ import Option from './Option';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { CONST, URL } from '../../constants';
+import { Link } from 'react-router-dom';
 
 const surveyMain = css({
   width: '80%',
@@ -82,16 +83,16 @@ function SurveyMain(props) {
     }
   };
 
-  useEffect(() => {
-    getQuestionApi(1).then((res) => {
-      setQData({
-        qId: 1,
-        qTitle: CONST.TITLES[0],
-        qDescription: CONST.DESCRIPTIONS[0],
-        qOption: [...res.data.data],
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   getQuestionApi(1).then((res) => {
+  //     setQData({
+  //       qId: 1,
+  //       qTitle: CONST.TITLES[0],
+  //       qDescription: CONST.DESCRIPTIONS[0],
+  //       qOption: [...res.data.data],
+  //     });
+  //   });
+  // }, []);
 
   return (
     <div css={surveyMain}>
@@ -127,7 +128,7 @@ function SurveyMain(props) {
           }}
         >
           <Button
-            color="default"
+            color={currentQuestion !== 1 ? 'default' : 'disabled'}
             size="large"
             value="Prev"
             variant="filled"
@@ -142,13 +143,19 @@ function SurveyMain(props) {
             }
           }}
         >
-          <Button
-            color="default"
-            size="large"
-            value="Next"
-            variant="filled"
-            iconPosition="back"
-          />
+          <Link
+            style={{ textDecoration: 'none' }}
+            to={currentQuestion === 4 && '/result'}
+            state={{ answers: answers }}
+          >
+            <Button
+              color={currentQuestion !== 4 ? 'default' : 'warning'}
+              size="large"
+              value="Next"
+              variant="filled"
+              iconPosition="back"
+            />
+          </Link>
         </div>
       </div>
     </div>
