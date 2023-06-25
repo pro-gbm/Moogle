@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useState } from 'react';
 
 const option = css({
   color: '#FFF',
-  border: '1px solid #FFF',
   borderRadius: '10px',
   height: '2.5rem',
   marginLeft: '15%',
@@ -13,7 +13,6 @@ const option = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'rgba(44,21,22, 0.55)',
   cursor: 'pointer',
   transition: 'box-shadow 0.2s ease-out',
   '&:hover': {
@@ -22,9 +21,26 @@ const option = css({
 });
 
 function Option(props) {
-  const { data } = props;
+  const { data, onClickOption } = props;
+  const [selectFlag, setSelectFlag] = useState(false);
 
-  return <div css={option}>{data}</div>;
+  return (
+    <div
+      css={option}
+      style={{
+        border: selectFlag ? '2px solid #f89d13' : '1px solid #FFF',
+        backgroundColor: selectFlag
+          ? 'rgba(255, 174, 0, 0.336)'
+          : 'rgba(44,21,22, 0.55)',
+      }}
+      onClick={() => {
+        onClickOption(data.id, !selectFlag);
+        setSelectFlag(!selectFlag);
+      }}
+    >
+      {data.name ? data.name : data.title}
+    </div>
+  );
 }
 
 export default Option;

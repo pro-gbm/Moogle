@@ -27,7 +27,8 @@ const surveyMain = css({
     marginBottom: '30px',
   },
   '.options': {
-    maxHeight: '65%',
+    minHeight: '50vh',
+    maxHeight: '50vh',
     overflow: 'scroll',
   },
 });
@@ -60,20 +61,8 @@ function SurveyMain(props) {
     actors: [],
   });
 
-  const getTestApi = async (param) => {
-    try {
-      console.log('파라미터', param);
-      let res = await axios.get(`${URL}/api/question/2`);
-      console.log('결과는', res);
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  };
-
   const getQuestionApi = async (questionNum) => {
     try {
-      console.log('몇 번째 질문을 호출할 거임?', questionNum);
       let res = await axios.get(`${URL}/api/question/${questionNum}`);
       console.log('결과는', res);
       return res;
@@ -83,24 +72,77 @@ function SurveyMain(props) {
     }
   };
 
-  // useEffect(() => {
-  //   getQuestionApi(1).then((res) => {
-  //     setQData({
-  //       qId: 1,
-  //       qTitle: CONST.TITLES[0],
-  //       qDescription: CONST.DESCRIPTIONS[0],
-  //       qOption: [...res.data.data],
-  //     });
-  //   });
-  // }, []);
+  const onClickOption = (paramOption, paramFlag) => {
+    console.log(paramOption, paramFlag);
+
+    switch (currentQuestion) {
+      case 1:
+        if (paramFlag) {
+          setAnswers({ ...answers, genres: [...answers.genres, paramOption] });
+        } else {
+          let filtered = [...answers.genres].filter(
+            (element) => element !== paramOption
+          );
+          setAnswers({ ...answers, genres: filtered });
+        }
+        break;
+      case 2:
+        if (paramFlag) {
+          setAnswers({ ...answers, movies: [...answers.movies, paramOption] });
+        } else {
+          let filtered = [...answers.movies].filter(
+            (element) => element !== paramOption
+          );
+          setAnswers({ ...answers, movies: filtered });
+        }
+        break;
+      case 3:
+        if (paramFlag) {
+          setAnswers({
+            ...answers,
+            directors: [...answers.directors, paramOption],
+          });
+        } else {
+          let filtered = [...answers.directors].filter(
+            (element) => element !== paramOption
+          );
+          setAnswers({ ...answers, directors: filtered });
+        }
+        break;
+      case 4:
+        if (paramFlag) {
+          setAnswers({ ...answers, actors: [...answers.actors, paramOption] });
+        } else {
+          let filtered = [...answers.actors].filter(
+            (element) => element !== paramOption
+          );
+          setAnswers({ ...answers, actors: filtered });
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (currentQuestion > 0 && currentQuestion < 5) {
+      getQuestionApi(currentQuestion).then((res) => {
+        setQData({
+          qId: currentQuestion,
+          qTitle: CONST.TITLES[currentQuestion - 1],
+          qDescription: CONST.DESCRIPTIONS[currentQuestion - 1],
+          qOption: [...res.data.data],
+        });
+      });
+    }
+  }, [currentQuestion]);
 
   return (
     <div css={surveyMain}>
       <div
         className="title"
         onClick={() => {
-          let param = {};
-          getTestApi(param);
+          console.log('answers 결과 보자', answers);
         }}
       >
         {qData.qId}. {qData.qTitle}
@@ -108,7 +150,11 @@ function SurveyMain(props) {
       <div className="description">{qData.qDescription}</div>
       <div className="options">
         {qData.qOption.map((option, index) => (
-          <Option key={`${option.id}-${index}`} data={option.name} />
+          <Option
+            key={`${option.id}-${index}`}
+            data={option}
+            onClickOption={onClickOption}
+          />
         ))}
       </div>
       <div css={buttonArea}>
