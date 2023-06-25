@@ -73,8 +73,6 @@ function SurveyMain(props) {
   };
 
   const onClickOption = (paramOption, paramFlag) => {
-    console.log(paramOption, paramFlag);
-
     switch (currentQuestion) {
       case 1:
         if (paramFlag) {
@@ -124,6 +122,36 @@ function SurveyMain(props) {
     }
   };
 
+  const figureDefaultFlag = (paramId) => {
+    let returnFlag = false;
+
+    switch (currentQuestion) {
+      case 1:
+        if (answers.genres.includes(paramId)) {
+          returnFlag = true;
+        }
+        break;
+      case 2:
+        if (answers.movies.includes(paramId)) {
+          returnFlag = true;
+        }
+        break;
+      case 3:
+        if (answers.directors.includes(paramId)) {
+          returnFlag = true;
+        }
+        break;
+      case 4:
+        if (answers.actors.includes(paramId)) {
+          returnFlag = true;
+        }
+        break;
+      default:
+        break;
+    }
+    return returnFlag;
+  };
+
   useEffect(() => {
     if (currentQuestion > 0 && currentQuestion < 5) {
       getQuestionApi(currentQuestion).then((res) => {
@@ -153,18 +181,12 @@ function SurveyMain(props) {
           <Option
             key={`${option.id}-${index}`}
             data={option}
+            defaultFlag={figureDefaultFlag(option.id)}
             onClickOption={onClickOption}
           />
         ))}
       </div>
       <div css={buttonArea}>
-        {/* <img
-          src="https://image.tmdb.org/t/p/original/3FyO7Z8WigeCQsUpW4B1x3qfmFx.jpg"
-          alt="헬렌.."
-          height="100px"
-          width="100px"
-        /> */}
-
         <div
           onClick={() => {
             if (currentQuestion > 1) {

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const option = css({
   color: '#FFF',
@@ -21,8 +21,8 @@ const option = css({
 });
 
 function Option(props) {
-  const { data, onClickOption } = props;
-  const [selectFlag, setSelectFlag] = useState(false);
+  const { data, onClickOption, defaultFlag } = props;
+  const [selectFlag, setSelectFlag] = useState(defaultFlag);
 
   return (
     <div
@@ -39,6 +39,12 @@ function Option(props) {
       }}
     >
       {data.name ? data.name : data.title}
+      {/* <img
+          src="https://image.tmdb.org/t/p/original/3FyO7Z8WigeCQsUpW4B1x3qfmFx.jpg"
+          alt="헬렌.."
+          height="100px"
+          width="100px"
+        /> */}
     </div>
   );
 }
