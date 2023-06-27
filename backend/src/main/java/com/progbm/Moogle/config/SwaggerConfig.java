@@ -1,5 +1,6 @@
 package com.progbm.Moogle.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -14,13 +15,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    @Value("${swagger.port}")
+    private int swaggerPort;
+
     /**
      * 스웨거 API 문서 생성
      */
     @Bean
     public Docket swaggerAPI() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .host("ec2-52-78-112-34.ap-northeast-2.compute.amazonaws.com")
+                .host("52.78.118.174:" + swaggerPort)
                 .apiInfo(this.swaggerInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.progbm.Moogle"))

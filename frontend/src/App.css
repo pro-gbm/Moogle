@@ -1,3 +1,19 @@
+.background {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: block;
+  background: url("./assets/theater.jpg") no-repeat center center fixed;
+  background-size: cover;
+  filter: grayscale(60%);
+  height: 100vh;
+}
+
 .container {
-  background-color: hotpink;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 100vh;
 }
