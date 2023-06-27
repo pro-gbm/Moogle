@@ -3,11 +3,8 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const AppResult = () => {
-  const location = useLocation();
-  const sendAnswers = location.state.answers;
-
   useEffect(() => {
-    console.log("컴포넌트가 화면에 나타남 ", sendAnswers);
+    console.log("컴포넌트가 화면에 나타남");
     fetch("http://52.78.118.174:8080/api/answer", {
       method: "POST",
       headers: {
@@ -15,14 +12,13 @@ const AppResult = () => {
       },
       body: {
         // survey 에서 받아온 데이터를 넘겨줌(라우터)
-        // sendAnswers,
         actors: [20],
         directors: [1],
         genres: [28],
         movies: [2553],
       },
     }).then((res) => {
-      alert("데이터 잘 넘김");
+      alert("데이터가 잘 넘어갔습니다.");
       console.log("res = ", res);
     });
     return () => {
