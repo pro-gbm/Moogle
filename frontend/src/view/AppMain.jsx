@@ -44,21 +44,7 @@ const AppMain = () => {
           }}
           onClick={handleClick}
         >
-          Drama
-        </button>
-        <button
-          type="button"
-          style={{
-            marginLeft: "10px",
-            border: "2px solid white",
-            borderRadius: "40px",
-            textAlign: "center",
-            fontFamily: "serif",
-            padding: "20px 60px 20px 60px",
-            cursor: "pointer",
-          }}
-        >
-          Movie
+          Start
         </button>
       </div>
     </>
