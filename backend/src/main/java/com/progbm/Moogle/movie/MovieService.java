@@ -7,6 +7,7 @@ import com.progbm.Moogle.ott.OttRepository;
 import com.progbm.Moogle.tmdb.TmdbService;
 import com.progbm.Moogle.tmdb.response.MovieProviderResponse;
 import com.progbm.Moogle.tmdb.response.PopularMovieResponse;
+import com.progbm.Moogle.util.Provider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -106,17 +104,34 @@ public class MovieService {
     public void addMovieProvider(int tmdbId) {
         // 영화 ID 별 OTT 조회
         MovieProviderResponse movieProviderResponse = tmdbService.getMovieProviders(tmdbId);
+        if (movieProviderResponse == null) {
+            return;
+        }
+
         Optional<Movie> movieOptional = movieRepository.findByTmdbId(tmdbId);
         if(movieOptional.isEmpty()){
             return;
         }
         Movie movie = movieOptional.get();
 
+        // null 인지 체크해서 호출
+        MovieProviderResponse.ProviderCountry results = movieProviderResponse.getResults();
+        if (results == null) {
+            return;
+        }
+
+        MovieProviderResponse.Country country = results.getCountry();
+        if (country == null) {
+            return;
+        }
+
+        List<MovieProviderResponse.Flatrate> flatrates = country.getFlatrate();
+        if (flatrates == null || flatrates.isEmpty()) {
+            return;
+        }
+
         // DB에 저장되어있는 OTT 정보 호출
-        List<Ott> otts = movieProviderResponse.getResults()
-                .getCountry()
-                .getFlatrate()
-                .stream()
+        List<Ott> otts = flatrates.stream()
                 .map(flatrate -> ottRepository.findByProviderId(flatrate.getProviderId()).orElse(null))
                 .filter(Objects::nonNull)
                 .toList();
@@ -131,5 +146,38 @@ public class MovieService {
             ott.addMovieOtt(movieOtt);
             movieOttRepository.save(movieOtt);
         });
+    }
+
+    public Movie getMovie(Long id) {
+        return movieRepository.findById(id).orElse(null);
+    }
+
+    public void countMovieOtt(Map<Provider, Integer> map, List<Long> movieIds) {
+        if (movieIds == null || movieIds.isEmpty()) {
+            return;
+        }
+
+        for (Long movieId : movieIds) {
+            Movie movie = this.getMovie(movieId);
+            if (movie == null) {
+                continue;
+            }
+
+            List<MovieOtt> movieOtts = movie.getMovieOtts();
+            if (movieOtts == null || movieOtts.isEmpty()) {
+                continue;
+            }
+
+            for (MovieOtt movieOtt : movieOtts) {
+                Ott ott = movieOtt.getOtt();
+                if (ott == null) {
+                    continue;
+                }
+
+                Provider provider = Provider.getProvider(ott.getOtt());
+                Integer count = map.getOrDefault(provider, 0);
+                map.put(provider, count + 1);
+            }
+        }
     }
 }

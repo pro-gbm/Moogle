@@ -97,16 +97,20 @@ public class TmdbService {
     }
 
     public MovieProviderResponse getMovieProviders(int movieId) {
-        return webClient.mutate()
-                .baseUrl(API_URL)
-                .build()
-                .get()
-                .uri(uriBuilder -> uriBuilder.path("/movie/{movieId}/watch/providers")
-                        .queryParam("api_key",API_KEY)
-                        .build(movieId))
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .bodyToMono(MovieProviderResponse.class)
-                .block();
+        try {
+            return webClient.mutate()
+                    .baseUrl(API_URL)
+                    .build()
+                    .get()
+                    .uri(uriBuilder -> uriBuilder.path("/movie/{movieId}/watch/providers")
+                            .queryParam("api_key", API_KEY)
+                            .build(movieId))
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .bodyToMono(MovieProviderResponse.class)
+                    .block();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

@@ -31,19 +31,19 @@ const parseProps = (variant, color, size) => {
       padding = 5;
       height = 15;
       font_size = 12;
-      border_radius = 3;
+      border_radius = 9;
       break;
     case 'medium':
       padding = 8;
       height = 20;
       font_size = 17;
-      border_radius = 4;
+      border_radius = 12;
       break;
     case 'large':
       padding = 12;
       height = 25;
       font_size = 22;
-      border_radius = 6;
+      border_radius = 15;
       break;
     default:
       padding = 12;
@@ -119,9 +119,10 @@ export default function Button(props) {
     border:
       variant === 'outlined' ? `2px solid ${feature.border_color}` : undefined,
     color: feature.text_color,
+    marginBottom: '10px',
     padding: `${feature.padding}px`,
-    paddingLeft: `calc(${feature.padding}px + 20px)`,
-    paddingRight: `calc(${feature.padding}px + 20px)`,
+    paddingLeft: `calc(${feature.padding} * 7px)`,
+    paddingRight: `calc(${feature.padding} * 7px)`,
     fontSize: `${feature.font_size}px`,
     borderRadius: `${feature.border_radius}px`,
     height: `${feature.height}px`,
