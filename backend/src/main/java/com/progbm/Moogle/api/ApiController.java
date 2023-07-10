@@ -83,7 +83,7 @@ public class ApiController {
      */
     @PostMapping("/answer")
     public ResponseEntity allResponseFromClient(@RequestBody AnswerRequest request) {
-        Map<Provider, Integer> map = new EnumMap<>(Provider.class);
+        Map<Provider, Integer> map = initProviderMap();
 
         // 1. 영화 목록에서 OTT 갯수 추가
         movieService.countMovieOtt(map, request.getMovies());
@@ -107,6 +107,17 @@ public class ApiController {
         DataResponse response = responseService.getDataResponse(result, HttpStatus.OK);
 
         return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    private Map<Provider, Integer> initProviderMap() {
+        Map<Provider, Integer> map = new EnumMap<>(Provider.class);
+        map.put(Provider.NETFLIX, 1);
+        map.put(Provider.DISNEY, 1);
+        map.put(Provider.APPLE, 1);
+        map.put(Provider.WATCHA, 1);
+        map.put(Provider.YOUTUBE_PREMIUM, 1);
+        map.put(Provider.AMAZON, 1);
+        return map;
     }
 
 }
